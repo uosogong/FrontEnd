@@ -1,5 +1,10 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import global from './styles/global';
+import theme from './styles/theme';
+import { ThemeProvider, createGlobalStyle } from 'styled-components';
+
+const GlobalStyle = createGlobalStyle`${global}`;
 
 function App() {
   const router = createBrowserRouter([
@@ -22,7 +27,14 @@ function App() {
     { path: '/department/:id/apply', element: <h1>부서 지원서 작성</h1> },
     { path: '*', element: <h1>404 처리</h1> },
   ]);
-  return <RouterProvider router={router}></RouterProvider>;
+
+  return (
+    <RouterProvider router={router}>
+      <ThemeProvider theme={theme}>
+        <GlobalStyle />
+      </ThemeProvider>
+    </RouterProvider>
+  );
 }
 
 export default App;
