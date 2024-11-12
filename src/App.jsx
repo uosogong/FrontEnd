@@ -1,40 +1,65 @@
 import './App.css';
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import global from './styles/global';
 import theme from './styles/theme';
 import { ThemeProvider, createGlobalStyle } from 'styled-components';
+import Main from './pages/Main';
+import Department from './pages/Department';
+import DepartmentApply from './pages/DepartmentApply';
+import BookMark from './pages/BookMark';
+import Applicant from './pages/Applicant';
+import Recruit from './pages/Recruit';
+import Edit from './pages/Edit';
+import TimeTable from './pages/TimeTable';
+import Login from './pages/Login';
+import SignUp from './pages/SignUp';
+import NotFound from './pages/NotFound';
+import MyPage from './pages/Mypage';
 
 const GlobalStyle = createGlobalStyle`${global}`;
 
-function App() {
-  const router = createBrowserRouter([
-    {
-      path: '/',
-      element: <h1>헤더 + 레이아웃</h1>,
-      children: [
-        { index: true, element: <h1>메인페이지</h1> },
-        { path: '/department/:id', element: <h1>부서상세페이지</h1> },
-        { path: '/mypage', element: <h1>마이페이지</h1> },
-        { path: '/mypage/bookmarks', element: <h1>찜목록</h1> },
-        { path: '/mypage/applicant', element: <h1>지원자 리스트</h1> },
-      ],
-    },
-    { path: '/login', element: <h1>로그인</h1> },
-    { path: '/signup', element: <h1>회원가입</h1> },
-    { path: '/mypage/edit', element: <h1>개인정보수정</h1> },
-    { path: '/mypage/timetable', element: <h1>시간표 수정</h1> },
-    { path: '/mypage/recruit', element: <h1>교직원용 모집 공고 작성</h1> },
-    { path: '/department/:id/apply', element: <h1>부서 지원서 작성</h1> },
-    { path: '*', element: <h1>404 처리</h1> },
-  ]);
+const Layout = () => (
+  <ThemeProvider theme={theme}>
+    <GlobalStyle />
+    <Outlet />
+  </ThemeProvider>
+);
 
-  return (
-    <RouterProvider router={router}>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-      </ThemeProvider>
-    </RouterProvider>
-  );
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      { index: true, element: <Main /> },
+      {
+        path: '/department/:id',
+        element: <Outlet />,
+        children: [
+          { index: true, element: <Department /> },
+          { path: 'apply', element: <DepartmentApply /> },
+        ],
+      },
+      {
+        path: '/mypage',
+        element: <Outlet />,
+        children: [
+          { index: true, element: <MyPage /> },
+          { path: 'bookmark', element: <BookMark /> },
+          { path: 'applicant', element: <Applicant /> },
+          { path: 'recruit', element: <Recruit /> },
+          { path: 'edit', element: <Edit /> },
+          { path: 'timetable', element: <TimeTable /> },
+        ],
+      },
+      { path: '/login', element: <Login /> },
+      { path: '/signup', element: <SignUp /> },
+      { path: '*', element: <NotFound /> },
+    ],
+  },
+]);
+
+function App() {
+  return <RouterProvider router={router} />;
 }
 
 export default App;
