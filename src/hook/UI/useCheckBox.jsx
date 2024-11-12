@@ -13,9 +13,9 @@ const useCheckBox = () => {
       <S.HiddenCheckBox type="checkbox" check={isCheck} onClick={toggle} />
       <S.CustomCheckBox check={isCheck} onClick={toggle}>
         {isCheck ? (
-          <img src={checkWhite} alt="check" width={20} height={20} />
+          <img src={checkWhite} alt="check" width={16} height={16} />
         ) : (
-          <img src={checkBlue} alt="check" width={20} height={20} />
+          <img src={checkBlue} alt="check" width={16} height={16} />
         )}
       </S.CustomCheckBox>
     </S.CheckBoxWrapper>
@@ -39,8 +39,8 @@ const S = {
     justify-content: center;
     align-items: center;
 
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
     border-radius: 4px;
     cursor: pointer;
 
