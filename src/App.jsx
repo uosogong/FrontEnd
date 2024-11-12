@@ -14,6 +14,7 @@ import TimeTable from './pages/TimeTable';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
+import Header from './component/common/Header/Header';
 
 const GlobalStyle = createGlobalStyle`${global}`;
 
@@ -24,6 +25,13 @@ const Layout = () => (
   </ThemeProvider>
 );
 
+const HeaderLayout = () => (
+  <>
+    <Header />
+    <Outlet />
+  </>
+);
+
 const router = createBrowserRouter([
   {
     path: '/',
@@ -32,7 +40,7 @@ const router = createBrowserRouter([
       { index: true, element: <Main /> },
       {
         path: '/department/:id',
-        element: <Outlet />,
+        element: <HeaderLayout />,
         children: [
           { index: true, element: <Department /> },
           { path: 'apply', element: <DepartmentApply /> },
@@ -40,7 +48,7 @@ const router = createBrowserRouter([
       },
       {
         path: '/mypage',
-        element: <Outlet />,
+        element: <HeaderLayout />,
         children: [
           { index: true, element: <MyPage /> },
           { path: 'bookmark', element: <Bookmark /> },
