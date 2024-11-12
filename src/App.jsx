@@ -6,7 +6,8 @@ import { ThemeProvider, createGlobalStyle } from 'styled-components';
 import Main from './pages/Main';
 import Department from './pages/Department';
 import DepartmentApply from './pages/DepartmentApply';
-import BookMark from './pages/BookMark';
+import MyPage from './pages/MyPage';
+import Bookmark from './pages/Bookmark';
 import Applicant from './pages/Applicant';
 import Recruit from './pages/Recruit';
 import Edit from './pages/Edit';
@@ -14,7 +15,6 @@ import TimeTable from './pages/TimeTable';
 import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
-import MyPage from './pages/Mypage';
 
 const GlobalStyle = createGlobalStyle`${global}`;
 
@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <Outlet />,
         children: [
           { index: true, element: <MyPage /> },
-          { path: 'bookmark', element: <BookMark /> },
+          { path: 'bookmark', element: <Bookmark /> },
           { path: 'applicant', element: <Applicant /> },
           { path: 'recruit', element: <Recruit /> },
           { path: 'edit', element: <Edit /> },
