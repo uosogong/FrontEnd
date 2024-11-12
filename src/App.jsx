@@ -1,4 +1,3 @@
-import './App.css';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 import global from './styles/global';
 import theme from './styles/theme';

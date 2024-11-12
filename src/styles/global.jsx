@@ -6,14 +6,7 @@ const global = css`
 
   html,
   body {
-    margin: 0;
-    padding: 0;
-    width: 100%;
-    font-size: 62.5%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    scroll-behavior: smooth;
+    margin: 0 auto;
   }
 
   a {
