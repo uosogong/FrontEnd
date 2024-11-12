@@ -45,7 +45,7 @@ const S = {
     cursor: pointer;
 
     background: ${(props) =>
-      props.check ? props.theme.colors.blue : props.theme.colors.white};
+      props.checked ? props.theme.colors.blue : props.theme.colors.white};
     border: 1.5px solid ${(props) => props.theme.colors.blue};
   `,
 };
