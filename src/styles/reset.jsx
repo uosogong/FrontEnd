@@ -104,6 +104,7 @@ const Reset = css`
   }
   body {
     line-height: 1;
+    box-sizing: border-box;
   }
   ol,
   ul {
