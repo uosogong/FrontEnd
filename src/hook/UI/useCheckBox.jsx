@@ -10,8 +10,8 @@ const useCheckBox = () => {
 
   const render = () => (
     <S.CheckBoxWrapper>
-      <S.HiddenCheckBox type="checkbox" check={isCheck} onClick={toggle} />
-      <S.CustomCheckBox check={isCheck} onClick={toggle}>
+      <S.HiddenCheckBox type="checkbox" checked={isCheck} onClick={toggle} />
+      <S.CustomCheckBox checked={isCheck} onClick={toggle}>
         {isCheck ? (
           <img src={checkWhite} alt="check" width={16} height={16} />
         ) : (
@@ -28,8 +28,8 @@ const S = {
   CheckBoxWrapper: styled.div``,
   HiddenCheckBox: styled.input.attrs((props) => ({
     type: 'checkbox',
-    check: props.checisCheck,
-    onclick: props.onClick,
+    checked: props.checisCheck,
+    onClick: props.onClick,
   }))`
     display: none;
     background-color: black;
