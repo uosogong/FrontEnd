@@ -1,8 +1,8 @@
 import { validateField } from '../utils';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 const useSignUp = () => {
-  const [joinForm, setJoinForm] = useState({
+  const joinFormRef = useRef({
     email: '',
     password: '',
     confirmPwd: '',
@@ -22,15 +22,12 @@ const useSignUp = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setJoinForm((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
+    joinFormRef.current[name] = value;
   };
 
   const handleBlur = (e) => {
     const { name, value } = e.target;
-    const errorMsg = validateField(name, value, joinForm);
+    const errorMsg = validateField(name, value, joinFormRef.current);
     setErrors((prev) => ({
       ...prev,
       [name]: errorMsg,
@@ -39,16 +36,15 @@ const useSignUp = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    alert(JSON.stringify(joinForm));
+    alert(JSON.stringify(joinFormRef.current));
   };
 
   const isFormValid =
-    Object.values(joinForm).every((value) => value.trim() !== '') &&
+    Object.values(joinFormRef.current).every((value) => value.trim() !== '') &&
     Object.values(errors).every((error) => error === null);
 
   return {
-    joinForm,
-    setJoinForm,
+    joinFormRef,
     errors,
     setErrors,
     handleChange,

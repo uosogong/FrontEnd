@@ -5,8 +5,14 @@ import { JOIN_FORM } from '../../constants';
 import { useSignUp } from '../../hook';
 
 const SignUp = () => {
-  const { joinForm, errors, handleChange, handleBlur, handleSubmit, disabled } =
-    useSignUp();
+  const {
+    joinFormRef,
+    errors,
+    handleChange,
+    handleBlur,
+    handleSubmit,
+    disabled,
+  } = useSignUp();
 
   return (
     <S.Wrapper>
@@ -21,7 +27,7 @@ const SignUp = () => {
               <p>{input.label}</p>
               <Input
                 {...field}
-                value={joinForm[field.name]}
+                defaultValue={joinFormRef.current[field.name]}
                 onChange={handleChange}
                 onBlur={handleBlur}
                 className={errorMessage ? 'err' : ''}
