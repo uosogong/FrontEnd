@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
 import Header from './component/common/Header/Header';
+import Navigation from './component/common/navigation/Navigation';
 
 const GlobalStyle = createGlobalStyle`${global}`;
 
@@ -28,6 +29,7 @@ const Layout = () => (
 const HeaderLayout = () => (
   <>
     <Header />
+    <Navigation />
     <Outlet />
   </>
 );
