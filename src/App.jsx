@@ -29,6 +29,7 @@ const Layout = () => (
 const HeaderLayout = () => (
   <>
     <Header />
+    <Navigation />
     <Outlet />
   </>
 );
