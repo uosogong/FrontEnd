@@ -15,6 +15,7 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
 import Header from './component/common/Header/Header';
+import Staff from './pages/Staff/Staff';
 
 const GlobalStyle = createGlobalStyle`${global}`;
 
@@ -56,6 +57,7 @@ const router = createBrowserRouter([
           { path: 'recruit', element: <Recruit /> },
           { path: 'edit', element: <Edit /> },
           { path: 'timetable', element: <TimeTable /> },
+          { path: 'staff', element: <Staff /> },
         ],
       },
       { path: '/login', element: <Login /> },
