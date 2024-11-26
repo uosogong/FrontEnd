@@ -15,11 +15,8 @@ import Login from './pages/Login';
 import SignUp from './pages/SignUp';
 import NotFound from './pages/NotFound';
 import Header from './component/common/Header/Header';
-<<<<<<< HEAD
 import Staff from './pages/Staff/Staff';
-=======
 import Navigation from './component/common/navigation/Navigation';
->>>>>>> main
 
 const GlobalStyle = createGlobalStyle`${global}`;
 
