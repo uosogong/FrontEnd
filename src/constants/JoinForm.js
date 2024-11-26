@@ -48,7 +48,7 @@ const JOIN_FORM = [
     info: [
       {
         type: 'text',
-        placeholder: '전화번호를 입력하세요',
+        placeholder: '01012345678',
         name: 'phoneNum',
       },
     ],
