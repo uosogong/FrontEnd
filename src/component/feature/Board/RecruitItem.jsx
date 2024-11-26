@@ -23,7 +23,11 @@ const RecruitItem = ({ item, setData }) => {
     <S.ItemWrapper>
       <S.LeftWrapper onClick={() => navigate(`/department/${item.id}`)}>
         <S.MainContent>
-          <Tag content={item.type} />
+          <div style={{ display: 'flex', gap: 4 }}>
+            {item.type.map((tag) => (
+              <Tag content={tag} />
+            ))}
+          </div>
           <p
             style={{ fontSize: 16, fontWeight: 600, color: theme.colors.grey4 }}
           >
@@ -33,7 +37,7 @@ const RecruitItem = ({ item, setData }) => {
             {item.description}
           </p>
         </S.MainContent>
-        <p style={{ fontSize: 12, fontWeight: 600, color: theme.colors.grey3 }}>
+        <p style={{ fontSize: 14, fontWeight: 700, color: theme.colors.grey3 }}>
           {item.date}
         </p>
       </S.LeftWrapper>
