@@ -418,7 +418,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react@*", "@types/react@^18.3.12":
+"@types/react@*", "@types/react@^18.2.6", "@types/react@^18.3.12":
   version "18.3.12"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.3.12.tgz#99419f182ccd69151813b7ee24b792fe08774f60"
   integrity sha512-D2wOSq/d6Agt28q7rSI3jhU7G6aiuzljDGZ2hTZHIkrTLUI+AF3WMeKkEZ9nN2fkBAlcktT6vcZjDFiIhMYEQw==
@@ -1971,6 +1971,13 @@ uri-js@^4.2.2:
   integrity sha512-7rKUyy33Q1yc98pQ1DAmLtwX109F7TIfWlW1Ydo8Wl1ii1SeHieeh0HHfPeL2fMXK6z0s8ecKs9frCuLJvndBg==
   dependencies:
     punycode "^2.1.0"
+
+use-table-drag-select@^0.2.0:
+  version "0.2.0"
+  resolved "https://registry.yarnpkg.com/use-table-drag-select/-/use-table-drag-select-0.2.0.tgz#f2f648c39c414ddae4c209b97db5e990b2b12245"
+  integrity sha512-r6mESHJ5InGkl124gImzRjCtomdLdLMWYoC3lkPpv5Xt3o59hKJPXkkDtpzCIsmlEfLHgxD6LP1P3vnDwKKy7Q==
+  dependencies:
+    "@types/react" "^18.2.6"
 
 vite@^5.4.10:
   version "5.4.10"
