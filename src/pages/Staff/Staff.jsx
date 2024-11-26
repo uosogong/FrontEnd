@@ -60,7 +60,7 @@ const Staff = () => {
         }}
       >
         <S.ContentWrapper>
-          <p style={{ fontSize: 20, fontWeight: 600 }}>모집분야</p>
+          <p style={{ fontSize: 20, fontWeight: 600 }}>모집 분야</p>
           <div style={{ display: 'flex', gap: 10 }}>
             <Button
               style={{
@@ -84,7 +84,7 @@ const Staff = () => {
         </S.ContentWrapper>
 
         <S.ContentWrapper>
-          <p style={{ fontSize: 20, fontWeight: 600 }}>모집분야</p>
+          <p style={{ fontSize: 20, fontWeight: 600 }}>모집 여부</p>
           <div style={{ display: 'flex', gap: 10 }}>
             <Button
               style={{
