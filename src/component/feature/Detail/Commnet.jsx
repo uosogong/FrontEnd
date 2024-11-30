@@ -27,8 +27,8 @@ const Comment = () => {
             <img src={profile} />
             <div>
               <S.CommentBox>
-                <span>{e.name}</span>
-                <span>{e.date}</span>
+                <span className="name">{e.name}</span>
+                <span className="date">{e.date}</span>
               </S.CommentBox>
               <S.CommentBox>
                 <S.ChipContainer>
@@ -50,7 +50,7 @@ export default Comment;
 
 const S = {
   Wrapper: styled.section`
-    width: 70%;
+    width: 80%;
     display: flex;
     flex-direction: column;
   `,
@@ -98,9 +98,10 @@ const S = {
     line-height: 25px;
 
     text-align: center;
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 400;
   `,
+
   CommentsWrapper: styled.section`
     display: flex;
     width: 100%;
@@ -124,6 +125,21 @@ const S = {
     width: 100%;
     display: flex;
     justify-content: space-between;
+
+    & .name {
+      color: ${({ theme }) => theme.colors.black};
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 20px;
+    }
+
+    & .date {
+      color: ${({ theme }) => theme.colors.grey2};
+      text-align: right;
+      font-size: 14px;
+      font-weight: 400;
+      line-height: 22px;
+    }
   `,
 
   CommentDetail: styled.div`

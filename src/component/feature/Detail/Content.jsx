@@ -6,18 +6,21 @@ const Content = () => {
   return (
     <>
       <S.TopContainer>
-        <S.Title>공과대학 컴퓨터과학부</S.Title>
-        <S.StateBar>
-          <span>
+        <S.HeaderItem>
+          <S.Title>공과대학 컴퓨터과학부</S.Title>
+          <button>수정하기</button>
+        </S.HeaderItem>
+        <S.HeaderItem>
+          <S.RateBox>
             <img src={ratingUtil(4.08)} />
             <p>평균 4.08점</p>
-          </span>
+          </S.RateBox>
           <S.ChipContainer>
             <S.Chip>모집중</S.Chip>
             <S.Chip>직장형 체험인턴</S.Chip>
             <S.Chip>근로</S.Chip>
           </S.ChipContainer>
-        </S.StateBar>
+        </S.HeaderItem>
       </S.TopContainer>
       <S.ContentBox>
         <pre>{CONTENT.data}</pre>
@@ -35,19 +38,19 @@ export default Content;
 const S = {
   TopContainer: styled.div`
     font-family: inherit;
-    width: 70%;
+    width: 80%;
   `,
 
   Title: styled.h1`
     font-family: Inter;
-    font-size: 40px;
+    font-size: 35px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
     color: ${({ theme }) => theme.colors.blue};
   `,
 
-  StateBar: styled.div`
+  HeaderItem: styled.div`
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -71,7 +74,7 @@ const S = {
   `,
 
   ContentBox: styled.section`
-    width: 70%;
+    width: 80%;
 
     & pre {
       font-family: inherit;
@@ -80,8 +83,22 @@ const S = {
     }
   `,
 
+  RateBox: styled.div`
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    & p {
+      color: ${({ theme }) => theme.colors.grey2};
+      font-family: Inter;
+      font-size: 15px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  `,
+
   ButtonBox: styled.div`
-    width: 70%;
+    width: 80%;
 
     display: flex;
     justify-content: flex-end;
