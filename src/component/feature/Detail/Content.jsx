@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import rate4 from '@assets/icon/rating4.svg';
 import { CONTENT } from '../../../constants/mocks/detailContent';
+import { ratingUtil } from '@utils';
 
 const Content = () => {
   return (
@@ -9,7 +9,7 @@ const Content = () => {
         <S.Title>공과대학 컴퓨터과학부</S.Title>
         <S.StateBar>
           <span>
-            <img src={rate4} />
+            <img src={ratingUtil(4.08)} />
             <p>평균 4.08점</p>
           </span>
           <S.ChipContainer>
@@ -34,6 +34,7 @@ export default Content;
 
 const S = {
   TopContainer: styled.div`
+    font-family: inherit;
     width: 70%;
   `,
 
@@ -64,12 +65,19 @@ const S = {
     align-items: center;
     border-radius: 20px;
     line-height: 5px;
+
     background-color: ${({ theme }) => theme.colors.blue};
     color: ${({ theme }) => theme.colors.white};
   `,
 
   ContentBox: styled.section`
     width: 70%;
+
+    & pre {
+      font-family: inherit;
+      font-size: 16px;
+      line-height: 1.6;
+    }
   `,
 
   ButtonBox: styled.div`

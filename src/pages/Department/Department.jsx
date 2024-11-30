@@ -18,6 +18,6 @@ const S = {
     padding: 100px 140px 6px 140px;
     flex-direction: column;
     align-items: center;
-    gap: 57px;
+    gap: 25px;
   `,
 };

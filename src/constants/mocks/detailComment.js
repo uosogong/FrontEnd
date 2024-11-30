@@ -6,7 +6,7 @@ export const COMMENT = [
     work: '매우 바쁨',
     mood: '유쾌함',
     content: '교수님 휴강 휴강 휴강 제발 휴강 갑자기 일 생겨서 휴강 해줘요',
-    data: '2024.10.13',
+    date: '2024.10.13',
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const COMMENT = [
     work: '매우 바쁨',
     mood: '유쾌함',
     content: '근로해서 돈 많이 벌고 싶어요 안 바쁜 부자 최고',
-    data: '2024.8.13',
+    date: '2024.8.13',
   },
   {
     id: 3,
@@ -24,7 +24,7 @@ export const COMMENT = [
     work: '매우 바쁨',
     mood: '유쾌함',
     content: '할거는 많고 시간은 없고 배는 고프고 잠은 오고',
-    data: '2024.10.13',
+    date: '2024.10.13',
   },
   {
     id: 4,
@@ -33,7 +33,7 @@ export const COMMENT = [
     work: '바쁨',
     mood: '화목함',
     content: '일 너무 힘들고 부려먹음 ',
-    data: '2024.10.21',
+    date: '2024.10.21',
   },
   {
     id: 5,
@@ -42,7 +42,7 @@ export const COMMENT = [
     work: '보통',
     mood: '엄격함',
     content: '안녕하세요 반가우이',
-    data: '2024.12.13',
+    date: '2024.12.13',
   },
   {
     id: 6,
@@ -51,7 +51,7 @@ export const COMMENT = [
     work: '매우 바쁨',
     mood: '엄격함',
     content: '개꿀 근로 이걸 안 함?',
-    data: '2024.11.13',
+    date: '2024.11.13',
   },
   {
     id: 7,
@@ -60,6 +60,6 @@ export const COMMENT = [
     work: '널널함',
     mood: '유쾌함',
     content: '전 너무 좋았어요 근로 최고 ~ ~',
-    data: '2024.11.3',
+    date: '2024.11.3',
   },
 ];
