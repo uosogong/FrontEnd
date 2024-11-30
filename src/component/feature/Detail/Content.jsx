@@ -1,8 +1,19 @@
 import styled from 'styled-components';
 import { CONTENT } from '../../../constants/mocks/detailContent';
 import { ratingUtil } from '@utils';
+import { useState } from 'react';
+import ApplyModal from './ApplyModal';
 
 const Content = () => {
+  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+
+  const handleApplyClick = () => {
+    setIsApplyModalOpen(true);
+  };
+
+  const handleCloseApplyModal = () => {
+    setIsApplyModalOpen(false);
+  };
   return (
     <>
       <S.TopContainer>
@@ -26,9 +37,14 @@ const Content = () => {
         <pre>{CONTENT.data}</pre>
       </S.ContentBox>
       <S.ButtonBox>
-        <button className="applyBtn">지원하기</button>
+        <button className="applyBtn" onClick={handleApplyClick}>
+          지원하기
+        </button>
         <button className="likeBtn">찜하기</button>
       </S.ButtonBox>
+      {isApplyModalOpen && (
+        <ApplyModal isOpen={isApplyModalOpen} close={handleCloseApplyModal} />
+      )}
     </>
   );
 };
