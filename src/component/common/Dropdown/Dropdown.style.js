@@ -34,6 +34,8 @@ const S = {
     justify-content: center;
     width: fit-content;
     gap: 10px;
+
+    background-color: ${({ theme }) => theme.colors.white};
   `,
   DropdownItem: styled.li`
     padding: 8px;

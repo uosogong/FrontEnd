@@ -1,3 +1,3 @@
 import validateField from './validation';
-
-export { validateField };
+import ratingUtil from './rating';
+export { validateField, ratingUtil };
