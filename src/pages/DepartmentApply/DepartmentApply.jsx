@@ -1,15 +1,15 @@
 import { useLocation } from 'react-router-dom';
-import styled from 'styled-components';
-import { unEditableForm } from '../../constants/mocks/apply';
+import styled, { css } from 'styled-components';
+import { unEditableForm, gridInputs } from '../../constants/mocks/apply';
 
 const DepartmentApply = () => {
   const location = useLocation();
-  console.log(location.state);
+  const pageTitle = location.state || '지원서';
 
   return (
     <S.Wrapper>
       <S.Layout>
-        <h1>{`${location.state}지원서 작성 페이지`}</h1>
+        <h1>{`${pageTitle}지원서 작성 페이지`}</h1>
         <S.Content>
           <div></div>
           <S.UnEditField>
@@ -30,18 +30,12 @@ const DepartmentApply = () => {
               <S.Input placeholder="주소를 입력해주세요" />
             </S.Form>
             <S.GridInput>
-              <S.GridInputItem>
-                <label>근무지 (직전학기)</label>
-                <S.Input placeholder="00부/00과" />
-              </S.GridInputItem>
-              <S.GridInputItem>
-                <label>총 근로 학기</label>
-                <S.Input placeholder="0학기" />
-              </S.GridInputItem>
-              <S.GridInputItem>
-                <label>타장학 수혜내용</label>
-                <S.Input placeholder="ex) 직장형체험인턴" />
-              </S.GridInputItem>
+              {gridInputs.map(({ label, placeholder }) => (
+                <S.GridInputItem key={label}>
+                  <label>{label}</label>
+                  <S.Input placeholder={placeholder} />
+                </S.GridInputItem>
+              ))}
             </S.GridInput>
             <S.Form>
               <label>이메일</label>
@@ -49,19 +43,27 @@ const DepartmentApply = () => {
             </S.Form>
             <S.Form>
               <label>지원동기</label>
-              <textarea placeholder="신청사유를 입력해주세요" />
+              <S.Textarea placeholder="신청사유를 입력해주세요" />
             </S.Form>
           </S.InputField>
           <S.Buttons>
             <S.Button>다음</S.Button>
-            <S.Button className="temp_save">임시저장</S.Button>
+            <S.Button variant="temp_save">임시저장</S.Button>
           </S.Buttons>
         </S.Content>
       </S.Layout>
     </S.Wrapper>
   );
 };
+
 export default DepartmentApply;
+
+const BaseInput = css`
+  width: 100%;
+  border: 1px solid ${({ theme }) => theme.colors.blue};
+  border-radius: 20px;
+  padding-left: 16px;
+`;
 
 const S = {
   Wrapper: styled.section`
@@ -74,7 +76,7 @@ const S = {
 
     & label {
       color: #000;
-      font-family: inter
+      font-family: inter;
       font-size: 20px;
       font-style: normal;
       font-weight: 400;
@@ -118,13 +120,13 @@ const S = {
     display: flex;
     flex-direction: column;
     gap: 15px;
+  `,
 
-    & textarea {
-      border: 1px solid ${({ theme }) => theme.colors.blue};
-      border-radius: 20px;
-      height: 150px;
-      padding: 15px;
-    }
+  Textarea: styled.textarea`
+    ${BaseInput}
+    height: 150px;
+    padding: 15px;
+    resize: none;
   `,
 
   UnEditableInput: styled.div`
@@ -146,11 +148,8 @@ const S = {
   `,
 
   Input: styled.input`
-    width: 100%;
-    border: 1px solid ${({ theme }) => theme.colors.blue};
-    border-radius: 20px;
+    ${BaseInput}
     height: 40px;
-    padding-left: 16px;
   `,
 
   GridInput: styled.div`
@@ -177,7 +176,6 @@ const S = {
   `,
 
   Button: styled.button`
-    background-color: ${({ theme }) => theme.colors.blue};
     border-radius: 20px;
     color: ${({ theme }) => theme.colors.white};
     text-align: center;
@@ -186,8 +184,7 @@ const S = {
     width: 40%;
     height: 35px;
 
-    &.temp_save {
-      background-color: ${({ theme }) => theme.colors.grey2};
-    }
+    background-color: ${({ theme, variant }) =>
+      variant === 'temp_save' ? theme.colors.grey2 : theme.colors.blue};
   `,
 };

@@ -16,3 +16,9 @@ export const unEditableForm = [
     content: '행정학과',
   },
 ];
+
+export const gridInputs = [
+  { label: '근무지 (직전학기)', placeholder: '00부/00과' },
+  { label: '총 근로 학기', placeholder: '0학기' },
+  { label: '타장학 수혜내용', placeholder: 'ex) 직장형체험인턴' },
+];
