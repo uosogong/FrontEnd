@@ -47,6 +47,5 @@ const S = {
     flex-direction: column;
     gap: 30px;
     align-items: center;
-    transform: translateY(-5%);
   `,
 };
