@@ -44,7 +44,18 @@ const validateField = (name, value, joinForm) => {
         ? null
         : '전화번호는 11자리 숫자여야 합니다';
 
+    case 'workCount':
+      if (!value.trim()) {
+        return '빈칸없이 입력해주세요';
+      }
+      if (parseInt(value) > 3) {
+        return '직체 및 근로는 3회 이상 불가능합니다';
+      }
+
     default:
+      if (!value.trim()) {
+        return '빈칸없이 입력해주세요';
+      }
       return null;
   }
 };
