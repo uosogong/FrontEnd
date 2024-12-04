@@ -1,11 +1,20 @@
 import styled from 'styled-components';
 import logo from '@assets/images/logo.svg';
 import RightButton from './RightButton';
+import { useNavigate } from 'react-router-dom';
 
 const Header = () => {
+  const navigate = useNavigate();
   return (
     <S.Wrapper>
-      <img src={logo} alt="로고" width={140} height={60} />
+      <img
+        src={logo}
+        alt="로고"
+        width={140}
+        height={60}
+        onClick={() => navigate('/')}
+        style={{ cursor: 'pointer' }}
+      />
       <RightButton />
     </S.Wrapper>
   );
