@@ -1,11 +1,13 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate, useMatch } from 'react-router-dom';
 import { useTheme } from 'styled-components';
 import styled from 'styled-components';
 
 const RightButton = () => {
   const theme = useTheme();
   const navigate = useNavigate();
+  const location = useLocation();
+  const match = useMatch('/mypage/*');
 
   //isLoggedIn 추후에 변경
   const [isLoggedIn, setIsLoggedIn] = useState(true);
@@ -27,9 +29,13 @@ const RightButton = () => {
   const AuthButtonComponent = () => {
     return (
       <S.ButtonWrapper>
-        <button onClick={() => navigate('./mypage')}>
-          <p style={{ fontSize: 16, color: theme.colors.grey3 }}>마이페이지</p>
-        </button>
+        {!match && (
+          <button onClick={() => navigate('/mypage')}>
+            <p style={{ fontSize: 16, color: theme.colors.grey3 }}>
+              마이페이지
+            </p>
+          </button>
+        )}
       </S.ButtonWrapper>
     );
   };
