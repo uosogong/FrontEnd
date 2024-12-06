@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { COMMENT } from '../../../constants/mocks/detailComment';
 import profile from '@assets/images/profile.svg';
-import rate4 from '@assets/icon/rating4.svg';
 import useDropdown from '@hook/UI/useDropdown';
 import { ratingUtil } from '@utils';
 

@@ -1,11 +1,35 @@
 import styled from 'styled-components';
 import { CONTENT } from '../../../constants/mocks/detailContent';
 import { ratingUtil } from '@utils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import ApplyModal from './ApplyModal';
+import { getFetcher } from '../../../api/method';
 
-const Content = () => {
+const Content = ({ id }) => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [Info, setInfo] = useState({
+    internRecruitment: false,
+    introduction: '',
+    leftDays: 0,
+    name: '',
+    rating: '0',
+    scholarshipRecruitment: false,
+    updateAt: '',
+  });
+
+  useEffect(() => {
+    fetchDepInfo();
+  }, [id]);
+
+  const fetchDepInfo = async () => {
+    try {
+      const res = await getFetcher(`/departments/${id}`);
+      console.log(res);
+      setInfo(res.departmentDetail);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleApplyClick = () => {
     setIsApplyModalOpen(true);
@@ -14,27 +38,35 @@ const Content = () => {
   const handleCloseApplyModal = () => {
     setIsApplyModalOpen(false);
   };
+
+  if (!Info.name) {
+    return <div>Loading...</div>;
+  }
   return (
     <>
       <S.TopContainer>
         <S.HeaderItem>
-          <S.Title>공과대학 컴퓨터과학부</S.Title>
+          <S.Title>{Info.name}</S.Title>
           <button>수정하기</button>
         </S.HeaderItem>
         <S.HeaderItem>
           <S.RateBox>
             <img src={ratingUtil(4.08)} />
-            <p>평균 4.08점</p>
+            <p>{`평균 ${Info.rating}점`}</p>
           </S.RateBox>
           <S.ChipContainer>
-            <S.Chip>모집중</S.Chip>
-            <S.Chip>직장형 체험인턴</S.Chip>
-            <S.Chip>근로</S.Chip>
+            <S.Chip
+              $isActive={Info.internRecruitment || Info.scholarshipRecruitment}
+            >
+              모집중
+            </S.Chip>
+            <S.Chip $isActive={Info.internRecruitment}>직장형 체험인턴</S.Chip>
+            <S.Chip $isActive={Info.scholarshipRecruitment}>근로</S.Chip>
           </S.ChipContainer>
         </S.HeaderItem>
       </S.TopContainer>
       <S.ContentBox>
-        <pre>{CONTENT.data}</pre>
+        <pre>{Info.introduction}</pre>
       </S.ContentBox>
       <S.ButtonBox>
         <button className="applyBtn" onClick={handleApplyClick}>
@@ -85,7 +117,8 @@ const S = {
     border-radius: 20px;
     line-height: 5px;
 
-    background-color: ${({ theme }) => theme.colors.blue};
+    background-color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors.blue : theme.colors.grey2};
     color: ${({ theme }) => theme.colors.white};
   `,
 
