@@ -1,7 +1,7 @@
 import { postFetcher } from '../api/method';
-import SignUp from '../pages/SignUp/SignUp';
+import { debounce } from 'lodash';
 import { validateField } from '../utils';
-import { useRef, useState } from 'react';
+import { useRef, useState, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const useSignUp = () => {
@@ -30,8 +30,23 @@ const useSignUp = () => {
     setJoinState('');
     const { name, value } = e.target;
     joinFormRef.current[name] = value;
+
+    debounceValidate(name, value);
   };
 
+  // 300ms 이상 멈추면 유효성 검사 반영
+  const debounceValidate = useCallback(
+    debounce((name, value) => {
+      const errorMsg = validateField(name, value, joinFormRef.current);
+      setErrors((prev) => ({
+        ...prev,
+        [name]: errorMsg,
+      }));
+    }, 300),
+    [],
+  );
+
+  // 초점 OUT시 유효성 검사
   const handleBlur = (e) => {
     const { name, value } = e.target;
     const errorMsg = validateField(name, value, joinFormRef.current);
