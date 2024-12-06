@@ -1,9 +1,15 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 const ApplyModal = ({ isOpen, close }) => {
   if (!isOpen) return null;
+  const navigate = useNavigate();
+
+  const handleModalClick = (label) => {
+    navigate('apply', { state: label });
+  };
 
   return ReactDOM.createPortal(
     <S.Wrapper>
@@ -15,13 +21,13 @@ const ApplyModal = ({ isOpen, close }) => {
         <S.Description>지원하실 근무 유형을 선택해주세요!</S.Description>
         <S.ButtonWrap>
           <S.BtnType1
-            onClick={() => alert('직체 선택됨')}
+            onClick={() => handleModalClick('직체')}
             style={{ width: 120 }}
           >
             직체
           </S.BtnType1>
           <S.BtnType2
-            onClick={() => alert('근로 선택됨')}
+            onClick={() => handleModalClick('근로')}
             style={{ width: 120 }}
           >
             근로
