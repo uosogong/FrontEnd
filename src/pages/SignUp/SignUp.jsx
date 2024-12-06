@@ -12,6 +12,7 @@ const SignUp = () => {
     handleBlur,
     handleSubmit,
     disabled,
+    joinState,
   } = useSignUp();
 
   return (
@@ -39,6 +40,7 @@ const SignUp = () => {
         <Button type="submit" onClick={handleSubmit} disabled={disabled}>
           회원가입
         </Button>
+        {joinState && <p className="err-meg">{joinState}</p>}
       </S.ButtonContainer>
     </S.Wrapper>
   );

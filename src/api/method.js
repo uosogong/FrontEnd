@@ -95,7 +95,6 @@ const setupInterceptors = (instance) => {
 
 export const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_APP_SERVER,
-  withCredentials: true,
 });
 
 setupInterceptors(axiosInstance);

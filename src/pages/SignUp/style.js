@@ -14,6 +14,12 @@ const S = {
       font-size: 2rem;
       font-weight: 600;
     }
+    & .err-meg {
+      display: flex;
+      color: ${({ theme }) => theme.colors.error};
+      font-size: 1rem;
+      justify-content: center;
+    }
   `,
 
   ButtonContainer: styled.form`
@@ -40,8 +46,8 @@ const S = {
       border: 1.5px solid ${({ theme }) => theme.colors.error};
     }
     & .err-meg {
-      color: ${({ theme }) => theme.colors.error};
       font-size: 0.7rem;
+      justify-content: flex-start;
     }
   `,
 };

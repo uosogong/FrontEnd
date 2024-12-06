@@ -1,8 +1,11 @@
 import { postFetcher } from '../api/method';
+import SignUp from '../pages/SignUp/SignUp';
 import { validateField } from '../utils';
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 const useSignUp = () => {
+  const navigate = useNavigate();
   const joinFormRef = useRef({
     email: '',
     password: '',
@@ -21,7 +24,10 @@ const useSignUp = () => {
     phoneNum: null,
   });
 
+  const [joinState, setJoinState] = useState('');
+
   const handleChange = (e) => {
+    setJoinState('');
     const { name, value } = e.target;
     joinFormRef.current[name] = value;
   };
@@ -42,10 +48,15 @@ const useSignUp = () => {
         name: joinFormRef.current.name,
         email: joinFormRef.current.email,
         password: joinFormRef.current.password,
-        studentID: joinFormRef.current.studentNum,
+        studentId: joinFormRef.current.studentNum,
+        phone: joinFormRef.current.phoneNum,
       });
+      navigate('/');
     } catch (error) {
-      console.log(error);
+      console.log(error.status);
+      if (error.status === 400) {
+        setJoinState('이미 등록된 회원입니다! 🤨');
+      }
     }
   };
 
@@ -61,6 +72,7 @@ const useSignUp = () => {
     handleBlur,
     handleSubmit,
     disabled: !isFormValid,
+    joinState,
   };
 };
 
