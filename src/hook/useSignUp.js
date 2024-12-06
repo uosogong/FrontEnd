@@ -1,3 +1,4 @@
+import { postFetcher } from '../api/method';
 import { validateField } from '../utils';
 import { useRef, useState } from 'react';
 
@@ -34,9 +35,18 @@ const useSignUp = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    alert(JSON.stringify(joinFormRef.current));
+    try {
+      await postFetcher('/signup', {
+        name: joinFormRef.current.name,
+        email: joinFormRef.current.email,
+        password: joinFormRef.current.password,
+        studentID: joinFormRef.current.studentNum,
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const isFormValid =
