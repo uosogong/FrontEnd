@@ -32,8 +32,23 @@ const useLogin = () => {
         email: inputData.email,
         password: inputData.password,
       });
-      const { accessToken } = res;
-      setAccessToken(accessToken);
+      console.log(res);
+      const { token, role, name } = res.message;
+      setAccessToken((prev) => ({
+        ...prev,
+        name,
+        token,
+        role,
+      }));
+      localStorage.setItem('accessToken', token);
+      localStorage.setItem(
+        'userInfo',
+        JSON.stringify({
+          name,
+          token,
+          role,
+        }),
+      );
       navigate('/');
     } catch (error) {
       console.log(error);
