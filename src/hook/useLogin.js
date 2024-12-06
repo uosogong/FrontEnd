@@ -10,16 +10,23 @@ const useLogin = () => {
   const userIdRef = useRef();
   const userPwdRef = useRef();
 
+  // 클릭으로 트리거 되는 제출로직
   const handleSubmit = (e) => {
     e.preventDefault();
     const inputData = {
       email: userIdRef.current.value,
       password: userPwdRef.current.value,
     };
-    login();
+    login(inputData);
   };
 
-  const login = async () => {
+  // 엔터시 트리거 되는 제출로직
+  const onSubmitForm = (e) => {
+    e.preventDefault();
+    handleSubmit();
+  };
+
+  const login = async (inputData) => {
     try {
       const res = await postFetcher('/signin', {
         email: inputData.email,
@@ -37,6 +44,7 @@ const useLogin = () => {
     userIdRef,
     userPwdRef,
     handleSubmit,
+    onSubmitForm,
   };
 };
 

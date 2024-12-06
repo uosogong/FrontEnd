@@ -6,11 +6,11 @@ import { NavLink } from 'react-router-dom';
 import { useLogin } from '../../hook';
 
 const Login = () => {
-  const { userIdRef, userPwdRef, handleSubmit } = useLogin();
+  const { userIdRef, userPwdRef, handleSubmit, onSubmitForm } = useLogin();
   return (
     <S.Wrapper>
       <img src={logo} alt="메인로고" />
-      <S.ButtonContainer>
+      <S.ButtonContainer onSubmit={onSubmitForm}>
         <Input
           type="text"
           ref={userIdRef}
