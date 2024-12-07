@@ -2,10 +2,17 @@ import styled from 'styled-components';
 import { ratingUtil } from '@utils';
 import ApplyModal from './ApplyModal';
 import { useContent } from '../../../hook/useDetail';
+import { useNavigate } from 'react-router-dom';
 
 const Content = ({ id }) => {
-  const { isApplyModalOpen, Info, handleApplyClick, handleCloseApplyModal } =
-    useContent({ id });
+  const {
+    isApplyModalOpen,
+    Info,
+    handleApplyClick,
+    handleCloseApplyModal,
+    userRole,
+  } = useContent({ id });
+  const navigate = useNavigate();
   if (!Info.name) {
     return <S.ErrorContent> 데이터를 읽어올 수 없습니다 🤧...</S.ErrorContent>;
   }
@@ -14,7 +21,11 @@ const Content = ({ id }) => {
       <S.TopContainer>
         <S.HeaderItem>
           <S.Title>{Info.name}</S.Title>
-          <button>수정하기</button>
+          {userRole === 'ADMIN' && (
+            <button onClick={() => navigate('/mypage/staff')}>
+              수정하기 ✍🏻
+            </button>
+          )}
         </S.HeaderItem>
         <S.HeaderItem>
           <S.RateBox>
@@ -75,6 +86,14 @@ const S = {
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+    & button {
+      padding: 0 10px 15px 0;
+    }
+
+    & button:hover {
+      text-decoration: underline;
+    }
   `,
 
   ChipContainer: styled.span`

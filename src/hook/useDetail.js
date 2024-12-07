@@ -65,6 +65,8 @@ const useCommnent = ({ id }) => {
 
 const useContent = ({ id }) => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
+  const [userRole, setUserRole] = useState('');
+
   const [Info, setInfo] = useState({
     internRecruitment: false,
     introduction: '',
@@ -77,6 +79,8 @@ const useContent = ({ id }) => {
 
   useEffect(() => {
     fetchDepInfo();
+    const { role } = JSON.parse(localStorage.getItem('userInfo')) || '';
+    setUserRole(role);
   }, [id]);
 
   const fetchDepInfo = async () => {
@@ -101,6 +105,7 @@ const useContent = ({ id }) => {
     Info,
     handleApplyClick,
     handleCloseApplyModal,
+    userRole,
   };
 };
 
