@@ -1,43 +1,37 @@
 import styled from 'styled-components';
-import { COMMENT } from '../../../constants/mocks/detailComment';
 import profile from '@assets/images/profile.svg';
-import rate4 from '@assets/icon/rating4.svg';
-import useDropdown from '@hook/UI/useDropdown';
 import { ratingUtil } from '@utils';
-
-const Comment = () => {
-  const count = COMMENT.length;
-  const dropdown = useDropdown({
-    title: '평점별 모아보기',
-    items: ['평점 5점', '평점 4점', '평점 3점', '평점 2점', '평점 1점'],
-  });
+import { useCommnent } from '../../../hook/useDetail';
+const Comment = ({ id }) => {
+  const { dropdown, feedbackList, filteredFeedbackList, moodState, busyState } =
+    useCommnent({ id });
   return (
     <S.Wrapper>
       <S.Header>
         <div>
-          <S.Title>{`${count}개의 후기`}</S.Title>
+          <S.Title>{`${feedbackList.length}개의 후기`}</S.Title>
           {dropdown.render()}
         </div>
 
         <S.CommmentBtn>후기 남기기</S.CommmentBtn>
       </S.Header>
       <S.CommentsWrapper>
-        {COMMENT.map((e) => (
-          <S.CommentWrapper key={e.id}>
+        {filteredFeedbackList.map((feedback, i) => (
+          <S.CommentWrapper key={feedback.i}>
             <img src={profile} />
             <div>
               <S.CommentBox>
-                <span className="name">{e.name}</span>
-                <span className="date">{e.date}</span>
+                <span className="name">{`익명의 시대평 ${i + 1}`}</span>
+                <span className="date">{feedback.date}</span>
               </S.CommentBox>
               <S.CommentBox>
                 <S.ChipContainer>
-                  <S.Chip>{e.work}</S.Chip>
-                  <S.Chip>{e.mood}</S.Chip>
+                  <S.Chip>{busyState(feedback.busy)}</S.Chip>
+                  <S.Chip>{moodState(feedback.mood)}</S.Chip>
                 </S.ChipContainer>
-                <img src={ratingUtil(e.rate)} alt="rate" />
+                <img src={ratingUtil(feedback.rating)} alt="rate" />
               </S.CommentBox>
-              <S.CommentDetail>{e.content}</S.CommentDetail>
+              <S.CommentDetail>{feedback.description}</S.CommentDetail>
             </div>
           </S.CommentWrapper>
         ))}
@@ -78,7 +72,7 @@ const S = {
 
   Chip: styled.label`
     border-radius: 20px;
-    padding: 3px 15px;
+    padding: 5px 17px;
     background-color: ${({ theme }) => theme.colors.blue};
     color: ${({ theme }) => theme.colors.white};
     font-family: Inter;
@@ -125,10 +119,11 @@ const S = {
     width: 100%;
     display: flex;
     justify-content: space-between;
+    margin-bottom: 5px;
 
     & .name {
       color: ${({ theme }) => theme.colors.black};
-      font-size: 14px;
+      font-size: 15px;
       font-weight: 400;
       line-height: 20px;
     }

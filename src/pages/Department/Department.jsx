@@ -1,11 +1,13 @@
 import styled from 'styled-components';
 import { Content, Comment } from '../../component/feature/Detail';
+import { useParams } from 'react-router-dom';
 
 const Department = () => {
+  const { id } = useParams();
   return (
     <S.Wrapper>
-      <Content />
-      <Comment />
+      <Content id={id} />
+      <Comment id={id} />
     </S.Wrapper>
   );
 };

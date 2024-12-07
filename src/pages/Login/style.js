@@ -8,6 +8,13 @@ const S = {
     justify-content: center;
     margin: 13% 0;
     gap: 2rem;
+
+    & .err-meg {
+      display: flex;
+      color: ${({ theme }) => theme.colors.error};
+      font-size: 1rem;
+      justify-content: center;
+    }
   `,
 
   ButtonContainer: styled.form`

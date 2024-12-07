@@ -4,12 +4,15 @@ import logo from '../../assets/images/logo.svg';
 import S from './style';
 import { NavLink } from 'react-router-dom';
 import { useLogin } from '../../hook';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
-  const { userIdRef, userPwdRef, handleSubmit, onSubmitForm } = useLogin();
+  const navigate = useNavigate();
+  const { userIdRef, userPwdRef, handleSubmit, onSubmitForm, loginSate } =
+    useLogin();
   return (
     <S.Wrapper>
-      <img src={logo} alt="메인로고" />
+      <img src={logo} alt="메인로고" onClick={() => navigate('/')} />
       <S.ButtonContainer onSubmit={onSubmitForm}>
         <Input
           type="text"
@@ -39,6 +42,7 @@ const Login = () => {
           <NavLink to="/signup">회원가입</NavLink>
         </li>
       </S.LoginNav>
+      {loginSate && <p className="err-meg">{loginSate}</p>}
     </S.Wrapper>
   );
 };

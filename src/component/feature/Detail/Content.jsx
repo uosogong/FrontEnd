@@ -1,40 +1,50 @@
 import styled from 'styled-components';
-import { CONTENT } from '../../../constants/mocks/detailContent';
 import { ratingUtil } from '@utils';
-import { useState } from 'react';
 import ApplyModal from './ApplyModal';
+import { useContent } from '../../../hook/useDetail';
+import { useNavigate } from 'react-router-dom';
 
-const Content = () => {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-
-  const handleApplyClick = () => {
-    setIsApplyModalOpen(true);
-  };
-
-  const handleCloseApplyModal = () => {
-    setIsApplyModalOpen(false);
-  };
+const Content = ({ id }) => {
+  const {
+    isApplyModalOpen,
+    Info,
+    handleApplyClick,
+    handleCloseApplyModal,
+    userRole,
+  } = useContent({ id });
+  const navigate = useNavigate();
+  if (!Info.name) {
+    return <S.ErrorContent> 데이터를 읽어올 수 없습니다 🤧...</S.ErrorContent>;
+  }
   return (
     <>
       <S.TopContainer>
         <S.HeaderItem>
-          <S.Title>공과대학 컴퓨터과학부</S.Title>
-          <button>수정하기</button>
+          <S.Title>{Info.name}</S.Title>
+          {userRole === 'ADMIN' && (
+            <button onClick={() => navigate('/mypage/staff')}>
+              수정하기 ✍🏻
+            </button>
+          )}
         </S.HeaderItem>
         <S.HeaderItem>
           <S.RateBox>
             <img src={ratingUtil(4.08)} />
-            <p>평균 4.08점</p>
+            <p>{`평균 ${Info.rating}점`}</p>
           </S.RateBox>
           <S.ChipContainer>
-            <S.Chip>모집중</S.Chip>
-            <S.Chip>직장형 체험인턴</S.Chip>
-            <S.Chip>근로</S.Chip>
+            <S.Chip
+              $isActive={Info.internRecruitment || Info.scholarshipRecruitment}
+            >
+              모집중
+            </S.Chip>
+            <S.Chip $isActive={Info.internRecruitment}>직장형 체험인턴</S.Chip>
+            <S.Chip $isActive={Info.scholarshipRecruitment}>근로</S.Chip>
           </S.ChipContainer>
         </S.HeaderItem>
       </S.TopContainer>
       <S.ContentBox>
-        <pre>{CONTENT.data}</pre>
+        <pre>{Info.introduction}</pre>
       </S.ContentBox>
       <S.ButtonBox>
         <button className="applyBtn" onClick={handleApplyClick}>
@@ -52,6 +62,12 @@ const Content = () => {
 export default Content;
 
 const S = {
+  ErrorContent: styled.div`
+    margin: 10rem;
+    font-size: 20px;
+    font-weight: 300;
+  `,
+
   TopContainer: styled.div`
     font-family: inherit;
     width: 80%;
@@ -70,6 +86,14 @@ const S = {
     display: flex;
     justify-content: space-between;
     width: 100%;
+
+    & button {
+      padding: 0 10px 15px 0;
+    }
+
+    & button:hover {
+      text-decoration: underline;
+    }
   `,
 
   ChipContainer: styled.span`
@@ -85,7 +109,8 @@ const S = {
     border-radius: 20px;
     line-height: 5px;
 
-    background-color: ${({ theme }) => theme.colors.blue};
+    background-color: ${({ theme, $isActive }) =>
+      $isActive ? theme.colors.blue : theme.colors.grey2};
     color: ${({ theme }) => theme.colors.white};
   `,
 

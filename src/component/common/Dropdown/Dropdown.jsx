@@ -14,8 +14,8 @@ const Dropdown = ({ isOpen, items, toggle, selectedItem, clickItem }) => {
       </S.DropdownToggle>
       {isOpen && (
         <S.DropdownItems>
-          {items.map((item) => (
-            <S.DropdownItem onClick={() => clickItem(item)}>
+          {items.map((item, i) => (
+            <S.DropdownItem key={i} onClick={() => clickItem(item)}>
               {item}
             </S.DropdownItem>
           ))}

@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { postFetcher } from '../api/method';
 import { useSetAtom } from 'jotai';
 import { tokenAtom } from '../store/tokenAtom';
@@ -9,6 +9,7 @@ const useLogin = () => {
   const setAccessToken = useSetAtom(tokenAtom);
   const userIdRef = useRef();
   const userPwdRef = useRef();
+  const [loginSate, setLoginState] = useState('');
 
   // 클릭으로 트리거 되는 제출로직
   const handleSubmit = (e) => {
@@ -32,11 +33,28 @@ const useLogin = () => {
         email: inputData.email,
         password: inputData.password,
       });
-      const { accessToken } = res;
-      setAccessToken(accessToken);
+      console.log(res);
+      const { token, role, name } = res.message;
+      setAccessToken((prev) => ({
+        ...prev,
+        name,
+        token,
+        role,
+      }));
+      localStorage.setItem('accessToken', token);
+      localStorage.setItem(
+        'userInfo',
+        JSON.stringify({
+          name,
+          token,
+          role,
+        }),
+      );
       navigate('/');
     } catch (error) {
-      console.log(error);
+      if (error.status === 500) {
+        setLoginState('아이디와 비밀번호를 다시 확인해주세요! 🤨');
+      }
     }
   };
 
@@ -45,6 +63,7 @@ const useLogin = () => {
     userPwdRef,
     handleSubmit,
     onSubmitForm,
+    loginSate,
   };
 };
 
