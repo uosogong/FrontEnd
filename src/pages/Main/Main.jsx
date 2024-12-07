@@ -1,4 +1,4 @@
-import Header from '@component/common/Header';
+import Header from '../../component/common/Header';
 import MainBanner from '@assets/images/main-banner.png';
 import Board from '@component/feature/Board';
 import styled from 'styled-components';
