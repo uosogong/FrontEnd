@@ -32,13 +32,13 @@ const DepartmentApply = () => {
             <S.Form>
               <label>연락처</label>
               <S.Input
-                name="phoneNum"
+                name="phone"
                 placeholder="연락처를 입력해주세요"
                 onChange={handleChange}
-                value={applyForm['phoneNum']}
+                value={applyForm['phone']}
                 onBlur={handleBlur}
               />
-              {errors.phoneNum && <p className="err-meg ">{errors.phoneNum}</p>}
+              {errors.phone && <p className="err-meg ">{errors.phone}</p>}
             </S.Form>
             <S.Form>
               <label>주소</label>
@@ -80,15 +80,13 @@ const DepartmentApply = () => {
             <S.Form>
               <label>지원동기</label>
               <S.Textarea
-                name="detailContent"
+                name="content"
                 placeholder="신청사유를 입력해주세요"
                 onChange={handleChange}
-                value={applyForm['detailContent']}
+                value={applyForm['content']}
                 onBlur={handleBlur}
               />
-              {errors.detailContent && (
-                <p className="err-meg ">{errors.detailContent}</p>
-              )}
+              {errors.content && <p className="err-meg ">{errors.content}</p>}
             </S.Form>
           </S.InputField>
           <S.Buttons>
