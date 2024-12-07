@@ -1,46 +1,13 @@
 import styled from 'styled-components';
-import { CONTENT } from '../../../constants/mocks/detailContent';
 import { ratingUtil } from '@utils';
-import { useEffect, useState } from 'react';
 import ApplyModal from './ApplyModal';
-import { getFetcher } from '../../../api/method';
+import { useContent } from '../../../hook/useDetail';
 
 const Content = ({ id }) => {
-  const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
-  const [Info, setInfo] = useState({
-    internRecruitment: false,
-    introduction: '',
-    leftDays: 0,
-    name: '',
-    rating: '0',
-    scholarshipRecruitment: false,
-    updateAt: '',
-  });
-
-  useEffect(() => {
-    fetchDepInfo();
-  }, [id]);
-
-  const fetchDepInfo = async () => {
-    try {
-      const res = await getFetcher(`/departments/${id}`);
-      console.log(res);
-      setInfo(res.departmentDetail);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleApplyClick = () => {
-    setIsApplyModalOpen(true);
-  };
-
-  const handleCloseApplyModal = () => {
-    setIsApplyModalOpen(false);
-  };
-
+  const { isApplyModalOpen, Info, handleApplyClick, handleCloseApplyModal } =
+    useContent({ id });
   if (!Info.name) {
-    return <div>Loading...</div>;
+    return <S.ErrorContent> 데이터를 읽어올 수 없습니다 🤧...</S.ErrorContent>;
   }
   return (
     <>
@@ -84,6 +51,12 @@ const Content = ({ id }) => {
 export default Content;
 
 const S = {
+  ErrorContent: styled.div`
+    margin: 10rem;
+    font-size: 20px;
+    font-weight: 300;
+  `,
+
   TopContainer: styled.div`
     font-family: inherit;
     width: 80%;

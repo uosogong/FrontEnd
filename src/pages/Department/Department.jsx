@@ -7,7 +7,7 @@ const Department = () => {
   return (
     <S.Wrapper>
       <Content id={id} />
-      <Comment />
+      <Comment id={id} />
     </S.Wrapper>
   );
 };
