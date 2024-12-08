@@ -12,6 +12,7 @@ const RightButton = () => {
   const match = useMatch('/mypage/*');
 
   const [accessToken, setaccessToken] = useAtom(tokenAtom);
+
   useEffect(() => {
     const Info = JSON.parse(localStorage.getItem('userInfo')) || [];
     if (Info.token) {
