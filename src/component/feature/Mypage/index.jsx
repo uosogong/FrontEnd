@@ -27,6 +27,7 @@ const Admin = () => {
 };
 
 const Student = () => {
+  const navigate = useNavigate();
   return (
     <S.BottomContainer>
       <S.Button onClick={() => navigate('./edit')}>
