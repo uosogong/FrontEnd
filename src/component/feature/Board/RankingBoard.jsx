@@ -33,7 +33,6 @@ const dummyData = [
 const RangkingBoard = () => {
   const navigate = useNavigate();
   const { topList } = useTopRank();
-  console.log(topList);
 
   return (
     <S.Wrapper>
