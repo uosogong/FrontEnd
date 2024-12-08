@@ -31,8 +31,12 @@ const Content = ({ id }) => {
         </S.HeaderItem>
         <S.HeaderItem>
           <S.RateBox>
-            <img src={ratingUtil(4.08)} />
-            <p>{`평균 ${Info.rating}점`}</p>
+            <img src={ratingUtil(Info.rating)} />
+            {isNaN(Info.rating) ? (
+              <p>아직 평점이 존재하지 않습니다! 🤫</p>
+            ) : (
+              <p>{`평균 ${Info.rating}점`}</p>
+            )}
           </S.RateBox>
           <S.ChipContainer>
             <S.Chip
@@ -141,6 +145,10 @@ const S = {
       font-style: normal;
       font-weight: 600;
       line-height: normal;
+    }
+
+    & img {
+      width: 116px;
     }
   `,
 

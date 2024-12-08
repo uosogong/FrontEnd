@@ -66,7 +66,7 @@ const useSignUp = () => {
         studentId: joinFormRef.current.studentNum,
         phone: joinFormRef.current.phoneNum,
       });
-      navigate('/');
+      navigate('/login');
     } catch (error) {
       console.log(error.status);
       if (error.status === 400) {
