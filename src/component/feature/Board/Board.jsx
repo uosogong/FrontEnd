@@ -6,18 +6,22 @@ import KeywordInput from '../../common/KeywordInput';
 import RecruitBoard from './RecruitBoard';
 import RangkingBoard from './RankingBoard';
 import { useRef } from 'react';
+import { useRecruitBoard } from '../../../hook/useMain';
+import { set } from 'lodash';
 const Board = () => {
-  const checkbox = useCheckBox();
-  const dropdown = useDropdown({
-    title: '정렬순',
-    items: ['최신순', '평점순'],
-  });
   const inputRef = useRef();
+  const {
+    departmentList,
+    setDepartmentList,
+    searchDepartment,
+    checkbox,
+    dropdown,
+  } = useRecruitBoard();
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    searchDepartment(inputRef.current.value);
     inputRef.current.value = '';
-    console.log(inputRef.current.value);
   };
 
   return (
@@ -27,7 +31,10 @@ const Board = () => {
         <KeywordInput ref={inputRef} handleSubmit={handleSubmit} />
       </S.BoardBar>
       <S.BoardWrapper>
-        <RecruitBoard />
+        <RecruitBoard
+          departmentList={departmentList}
+          setDepartmentList={setDepartmentList}
+        />
         <RangkingBoard />
       </S.BoardWrapper>
     </S.Wrapper>
