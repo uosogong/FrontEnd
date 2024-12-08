@@ -9,6 +9,8 @@ const useApply = () => {
   const pageTitle = location.state || '';
 
   const [applyForm, setApplyForm] = useState({
+    isScholarshipResume: true,
+    isInternResume: true,
     email: '',
     phone: '',
     address: '',
@@ -28,12 +30,30 @@ const useApply = () => {
     otherScholarship: null,
   });
 
-  const unEditableData = useState({
+  const [uneditableData, setUneditableData] = useState({
     name: '',
     job: '',
     studentId: '',
     departmentName: '',
   });
+
+  // 직체인지 아닌지 판별
+  useEffect(() => {
+    if (pageTitle === '직체') {
+      setApplyForm((prevForm) => ({
+        ...prevForm,
+        isInternResume: true,
+        isScholarshipResume: false,
+      }));
+    } else {
+      setApplyForm((prevForm) => ({
+        ...prevForm,
+        isInternResume: false,
+        isScholarshipResume: true,
+      }));
+    }
+  }, [pageTitle]);
+
   const debouncedValidate = useCallback(
     debounce((name, value) => {
       const errorMsg = validateField(name, value, applyForm);
@@ -64,8 +84,16 @@ const useApply = () => {
 
   const fetchUserData = async () => {
     const res = await getFetcher('/users');
-    console.log(res);
+    const { name, studentId, departmentName } = res.message;
+
+    setUneditableData({
+      name: name,
+      studentId: studentId,
+      departmentName: departmentName,
+      job: pageTitle,
+    });
   };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
@@ -89,8 +117,11 @@ const useApply = () => {
   };
 
   const isFormValid =
-    Object.values(applyForm).every((value) => value.trim() !== '') &&
-    Object.values(errors).every((error) => error === null);
+    Object.values(applyForm).every((value) =>
+      typeof value === 'string'
+        ? value.trim() !== ''
+        : value !== null && value !== undefined,
+    ) && Object.values(errors).every((error) => error === null);
 
   return {
     isFormValid,
@@ -101,6 +132,7 @@ const useApply = () => {
     errors,
     applyForm,
     pageTitle,
+    uneditableData,
   };
 };
 

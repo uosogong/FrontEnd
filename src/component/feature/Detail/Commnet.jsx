@@ -2,7 +2,9 @@ import styled from 'styled-components';
 import profile from '@assets/images/profile.svg';
 import { ratingUtil } from '@utils';
 import { useCommnent } from '../../../hook/useDetail';
+import { useNavigate } from 'react-router-dom';
 const Comment = ({ id }) => {
+  const navigate = useNavigate();
   const { dropdown, feedbackList, filteredFeedbackList, moodState, busyState } =
     useCommnent({ id });
   return (
@@ -13,7 +15,9 @@ const Comment = ({ id }) => {
           {dropdown.render()}
         </div>
 
-        <S.CommmentBtn>후기 남기기</S.CommmentBtn>
+        <S.CommmentBtn onClick={() => navigate('review')}>
+          후기 남기기
+        </S.CommmentBtn>
       </S.Header>
       <S.CommentsWrapper>
         {filteredFeedbackList.map((feedback, i) => (
