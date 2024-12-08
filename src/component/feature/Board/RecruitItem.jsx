@@ -7,70 +7,86 @@ import likeButtonLike from '@assets/images/like-button-like.svg';
 import { useNavigate } from 'react-router-dom';
 
 const RecruitItem = ({ item, setData }) => {
-  const handleLikeClick = () => {
-    setData((prevData) =>
-      prevData.map((dataItem) =>
-        dataItem.id === item.id
-          ? { ...dataItem, like: !dataItem.like }
-          : dataItem,
-      ),
-    );
-  };
+  // const handleLikeClick = () => {
+  //   setData((prevData) =>
+  //     prevData.map((dataItem) =>
+  //       dataItem.id === item.id
+  //         ? { ...dataItem, like: !dataItem.like }
+  //         : dataItem,
+  //     ),
+  //   );
+  // };
+  const filteredRating = (rating) => (isNaN(rating) ? 0 : rating);
 
   const theme = useTheme();
   const navigate = useNavigate();
   return (
-    <S.ItemWrapper>
-      <S.LeftWrapper onClick={() => navigate(`/department/${item.id}`)}>
-        <S.MainContent>
-          <div style={{ display: 'flex', gap: 4 }}>
-            {item.type.map((tag) => (
-              <Tag content={tag} />
-            ))}
-          </div>
+    item.content && (
+      <S.ItemWrapper>
+        <S.LeftWrapper
+          onClick={() => navigate(`/department/${item.departmentId}`)}
+        >
+          <S.MainContent>
+            <div style={{ display: 'flex', gap: 4 }}>
+              {item.content.internRecruitment && <Tag content={'근로'} />}
+              {item.content.scholarshipRecruitment && (
+                <Tag content={'직장체험형인턴'} />
+              )}
+            </div>
+            <p
+              style={{
+                fontSize: 16,
+                fontWeight: 600,
+                color: theme.colors.grey4,
+              }}
+            >
+              {item.content.name}
+            </p>
+          </S.MainContent>
           <p
-            style={{ fontSize: 16, fontWeight: 600, color: theme.colors.grey4 }}
+            style={{ fontSize: 14, fontWeight: 700, color: theme.colors.grey3 }}
           >
-            {item.title}
+            D{item.content.leftDays}
           </p>
-          <p style={{ fontSize: 12, color: theme.colors.grey3 }}>
-            {item.description}
-          </p>
-        </S.MainContent>
-        <p style={{ fontSize: 14, fontWeight: 700, color: theme.colors.grey3 }}>
-          {item.date}
-        </p>
-      </S.LeftWrapper>
-      <S.RightWrapper>
-        <S.ReviewContent>
-          <div style={{ display: 'flex', gap: 4 }}>
-            {[...Array(Math.round(item.score))].map((_, index) => (
-              <img
-                key={`filled-${index}`}
-                src={starFilled}
-                alt="별점"
-                width={20}
-                height={20}
-              />
-            ))}
-            {[...Array(5 - Math.round(item.score))].map((_, index) => (
-              <img
-                key={`empty-${index}`}
-                src={starEmpty}
-                alt="별점"
-                width={20}
-                height={20}
-              />
-            ))}
-          </div>
-          <p
-            style={{ fontSize: 12, color: theme.colors.grey2, fontWeight: 600 }}
-          >
-            {item.score}점
-          </p>
-        </S.ReviewContent>
-        <button onClick={handleLikeClick}>
-          {item.like ? (
+        </S.LeftWrapper>
+        <S.RightWrapper>
+          <S.ReviewContent>
+            <div style={{ display: 'flex', gap: 4 }}>
+              {[...Array(Math.round(filteredRating(item.content.rating)))].map(
+                (_, index) => (
+                  <img
+                    key={`filled-${index}`}
+                    src={starFilled}
+                    alt="별점"
+                    width={20}
+                    height={20}
+                  />
+                ),
+              )}
+              {[
+                ...Array(5 - Math.round(filteredRating(item.content.rating))),
+              ].map((_, index) => (
+                <img
+                  key={`empty-${index}`}
+                  src={starEmpty}
+                  alt="별점"
+                  width={20}
+                  height={20}
+                />
+              ))}
+            </div>
+            <p
+              style={{
+                fontSize: 12,
+                color: theme.colors.grey2,
+                fontWeight: 600,
+              }}
+            >
+              {filteredRating(item.content.rating)}점
+            </p>
+          </S.ReviewContent>
+          {/* <button onClick={handleLikeClick}>
+          {item.content.like ? (
             <img src={likeButtonLike} alt="좋아요버튼" width={42} height={42} />
           ) : (
             <img
@@ -80,9 +96,10 @@ const RecruitItem = ({ item, setData }) => {
               height={42}
             />
           )}
-        </button>
-      </S.RightWrapper>
-    </S.ItemWrapper>
+        </button> */}
+        </S.RightWrapper>
+      </S.ItemWrapper>
+    )
   );
 };
 
