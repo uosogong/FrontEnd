@@ -11,6 +11,8 @@ const Content = ({ id }) => {
     handleApplyClick,
     handleCloseApplyModal,
     userRole,
+    isDib,
+    postDib,
   } = useContent({ id });
   const navigate = useNavigate();
   if (!Info.name) {
@@ -50,7 +52,11 @@ const Content = ({ id }) => {
         <button className="applyBtn" onClick={handleApplyClick}>
           지원하기
         </button>
-        <button className="likeBtn">찜하기</button>
+        {userRole !== '' && (
+          <button className={`${isDib ? `isDib` : `notDib`}`} onClick={postDib}>
+            찜하기
+          </button>
+        )}
       </S.ButtonBox>
       {isApplyModalOpen && (
         <ApplyModal isOpen={isApplyModalOpen} close={handleCloseApplyModal} />
@@ -164,8 +170,12 @@ const S = {
       background-color: ${({ theme }) => theme.colors.blue};
     }
 
-    & .likeBtn {
+    & .notDib {
       background-color: ${({ theme }) => theme.colors.grey2};
+    }
+
+    & .isDib {
+      background-color: ${({ theme }) => theme.colors.skyBlue};
     }
   `,
 };

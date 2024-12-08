@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { getFetcher } from '../api/method';
+import { getFetcher, postFetcher } from '../api/method';
 import useDropdown from './UI/useDropdown';
 
 const useCommnent = ({ id }) => {
@@ -66,6 +66,7 @@ const useCommnent = ({ id }) => {
 const useContent = ({ id }) => {
   const [isApplyModalOpen, setIsApplyModalOpen] = useState(false);
   const [userRole, setUserRole] = useState('');
+  const [isDib, setIsDib] = useState(false);
 
   const [Info, setInfo] = useState({
     internRecruitment: false,
@@ -81,6 +82,7 @@ const useContent = ({ id }) => {
     fetchDepInfo();
     const { role } = JSON.parse(localStorage.getItem('userInfo')) || '';
     setUserRole(role);
+    fetchDib();
   }, [id]);
 
   const fetchDepInfo = async () => {
@@ -88,6 +90,24 @@ const useContent = ({ id }) => {
       const res = await getFetcher(`/departments/${id}`);
       console.log(res);
       setInfo(res.departmentDetail);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const fetchDib = async () => {
+    try {
+      const { userDib } = await getFetcher(`/dibs/${id}`);
+      setIsDib(userDib);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const postDib = async () => {
+    try {
+      const { changedStatus } = await postFetcher(`/dibs/${id}`);
+      setIsDib(changedStatus);
     } catch (err) {
       console.log(err);
     }
@@ -106,6 +126,8 @@ const useContent = ({ id }) => {
     handleApplyClick,
     handleCloseApplyModal,
     userRole,
+    isDib,
+    postDib,
   };
 };
 

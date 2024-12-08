@@ -19,7 +19,7 @@ export const S = {
     & label {
       color: #000;
       font-family: inter;
-      font-size: 20px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
