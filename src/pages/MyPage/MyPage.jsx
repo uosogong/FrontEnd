@@ -3,14 +3,17 @@ import Vector2 from '../../assets/icon/Vector2.svg';
 import { useNavigate } from 'react-router-dom';
 import S from './style';
 import { useEffect, useState } from 'react';
+import { Admin, Student } from '../../component/feature/Mypage';
 
 const MyPage = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState('');
+  const [role, setRole] = useState('');
 
   useEffect(() => {
-    const { name } = JSON.parse(localStorage.getItem('userInfo'));
+    const { name, role } = JSON.parse(localStorage.getItem('userInfo'));
     setUser(name);
+    setRole(role);
   }, []);
   return (
     <S.Wrapper>
@@ -21,28 +24,7 @@ const MyPage = () => {
         </div>
         <img src={UserPic}></img>
       </S.TopContainer>
-      <S.BottomContainer>
-        <S.Button onClick={() => navigate('./edit')}>
-          <S.ButtonIcon>✍🏻</S.ButtonIcon>
-          <p>개인정보 수정</p>
-          <S.ArrowIcon src={Vector2} />
-        </S.Button>
-        <S.Button onClick={() => navigate('./bookmark')}>
-          <S.ButtonIcon>📑</S.ButtonIcon>
-          <p>찜 목록</p>
-          <S.ArrowIcon src={Vector2} />
-        </S.Button>
-        <S.Button onClick={() => navigate('./edit')}>
-          <S.ButtonIcon>📂</S.ButtonIcon>
-          <p>내 지원목록 보기</p>
-          <S.ArrowIcon src={Vector2} />
-        </S.Button>
-        <S.Button onClick={() => navigate('./timetable')}>
-          <S.ButtonIcon>📘</S.ButtonIcon>
-          <p>내 시간표 관리</p>
-          <S.ArrowIcon src={Vector2} />
-        </S.Button>
-      </S.BottomContainer>
+      {role === 'ADMIN' ? <Admin /> : <Student />}
     </S.Wrapper>
   );
 };
