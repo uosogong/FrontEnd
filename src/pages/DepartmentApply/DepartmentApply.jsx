@@ -12,6 +12,7 @@ const DepartmentApply = () => {
     errors,
     applyForm,
     pageTitle,
+    uneditableData,
   } = useApply();
 
   return (
@@ -24,7 +25,9 @@ const DepartmentApply = () => {
             {unEditableForm.map((form) => (
               <S.Form>
                 <label>{form.label}</label>
-                <S.UnEditableInput>{form.content}</S.UnEditableInput>
+                <S.UnEditableInput>
+                  {uneditableData[form.key]}
+                </S.UnEditableInput>
               </S.Form>
             ))}
           </S.UnEditField>

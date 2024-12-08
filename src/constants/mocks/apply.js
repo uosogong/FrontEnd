@@ -1,19 +1,19 @@
 export const unEditableForm = [
   {
     label: '이름',
-    content: '김고은',
+    key: 'name',
   },
   {
     label: '직무유형 (직체/ 근로)',
-    content: '직체',
+    key: 'job',
   },
   {
     label: '학번',
-    content: '2021120009',
+    key: 'studentId',
   },
   {
     label: '학부/과',
-    content: '행정학과',
+    key: 'departmentName',
   },
 ];
 
