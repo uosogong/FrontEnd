@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 import styled, { css } from 'styled-components';
+import { useTopRank } from '../../../hook/useMain';
 
 const dummyData = [
   {
@@ -31,19 +32,23 @@ const dummyData = [
 
 const RangkingBoard = () => {
   const navigate = useNavigate();
+  const { topList } = useTopRank();
+  console.log(topList);
+
   return (
     <S.Wrapper>
       <p style={{ fontSize: 16, fontWeight: 600 }}>인기부서 TOP 5</p>
       <div>
-        {dummyData.map((item, index) => {
+        {topList.map((item, index) => {
           return (
             <S.RankingItem
               index={index}
-              key={item.id}
-              onClick={() => navigate(`/department/${item.id}`)}
+              key={item.departmentId}
+              onClick={() => navigate(`/department/${item.departmentId}`)}
             >
-              <p style={{ fontSize: 12, fontWeight: 600 }}>{item.title}</p>
-              <p style={{ fontSize: 12 }}>{item.description}</p>
+              <p style={{ fontSize: 14, fontWeight: 600 }}>
+                {item.content.name}
+              </p>
             </S.RankingItem>
           );
         })}
@@ -67,7 +72,7 @@ const S = {
     height: fit-content;
   `,
   RankingItem: styled.div`
-    padding: 10px;
+    padding: 20px 10px;
     display: flex;
     flex-direction: column;
     cursor: pointer;
