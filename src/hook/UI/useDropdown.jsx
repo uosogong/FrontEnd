@@ -5,6 +5,8 @@ const useDropdown = ({ title, items }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedItem, setSelectedItem] = useState(title);
 
+  const reset = () => setSelectedItem(title);
+
   const toggle = () => setIsOpen((prev) => !prev);
 
   const clickItem = (item) => {
@@ -24,6 +26,6 @@ const useDropdown = ({ title, items }) => {
     );
   };
 
-  return { selectedItem, toggle, render };
+  return { selectedItem, toggle, render, reset };
 };
 export default useDropdown;

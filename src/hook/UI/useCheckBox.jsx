@@ -6,6 +6,8 @@ import checkBlue from '@assets/icon/check-blue.svg';
 const useCheckBox = () => {
   const [isCheck, setIsCheck] = useState(false);
 
+  const reset = () => setIsCheck(false);
+
   const toggle = () => setIsCheck((prev) => !prev);
 
   const render = () => (
@@ -21,7 +23,7 @@ const useCheckBox = () => {
     </S.CheckBoxWrapper>
   );
 
-  return { render, isCheck, toggle };
+  return { render, isCheck, toggle, reset };
 };
 
 const S = {
