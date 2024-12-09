@@ -5,17 +5,31 @@ import starEmpty from '@assets/icon/star-empty.svg';
 import likeButtonDefault from '@assets/images/like-button-default.svg';
 import likeButtonLike from '@assets/images/like-button-like.svg';
 import { useNavigate } from 'react-router-dom';
+import { postFetcher } from '../../../api/method';
 
 const RecruitItem = ({ item, setData }) => {
-  // const handleLikeClick = () => {
-  //   setData((prevData) =>
-  //     prevData.map((dataItem) =>
-  //       dataItem.id === item.id
-  //         ? { ...dataItem, like: !dataItem.like }
-  //         : dataItem,
-  //     ),
-  //   );
-  // };
+  const handleLikeClick = async () => {
+    setData((prevData) =>
+      prevData.map((dataItem) =>
+        dataItem.departmentId === item.departmentId
+          ? {
+              ...dataItem,
+              content: {
+                ...dataItem.content,
+                isDibs: !dataItem.content.isDibs,
+              },
+            }
+          : dataItem,
+      ),
+    );
+    try {
+      await postFetcher(`/dibs/${item.departmentId}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+
   const filteredRating = (rating) => (isNaN(rating) ? 0 : rating);
 
   const theme = useTheme();
@@ -28,10 +42,14 @@ const RecruitItem = ({ item, setData }) => {
         >
           <S.MainContent>
             <div style={{ display: 'flex', gap: 4 }}>
-              {item.content.internRecruitment && <Tag content={'근로'} />}
-              {item.content.scholarshipRecruitment && (
-                <Tag content={'직장체험형인턴'} />
-              )}
+              <Tag
+                content={'근로'}
+                activeState={item.content.internRecruitment}
+              />
+              <Tag
+                content={'직장체험형인턴'}
+                activeState={item.content.scholarshipRecruitment}
+              />
             </div>
             <p
               style={{
@@ -85,18 +103,25 @@ const RecruitItem = ({ item, setData }) => {
               {filteredRating(item.content.rating)}점
             </p>
           </S.ReviewContent>
-          {/* <button onClick={handleLikeClick}>
-          {item.content.like ? (
-            <img src={likeButtonLike} alt="좋아요버튼" width={42} height={42} />
-          ) : (
-            <img
-              src={likeButtonDefault}
-              alt="좋아요버튼"
-              width={42}
-              height={42}
-            />
+          {userInfo && (
+            <button onClick={handleLikeClick}>
+              {item.content.isDibs ? (
+                <img
+                  src={likeButtonLike}
+                  alt="좋아요버튼"
+                  width={42}
+                  height={42}
+                />
+              ) : (
+                <img
+                  src={likeButtonDefault}
+                  alt="좋아요버튼"
+                  width={42}
+                  height={42}
+                />
+              )}
+            </button>
           )}
-        </button> */}
         </S.RightWrapper>
       </S.ItemWrapper>
     )

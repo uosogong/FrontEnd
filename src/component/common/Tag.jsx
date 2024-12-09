@@ -1,9 +1,9 @@
 import styled, { useTheme } from 'styled-components';
 
-const Tag = ({ content }) => {
+const Tag = ({ content, activeState = true }) => {
   const theme = useTheme();
   return (
-    <S.Wrapper>
+    <S.Wrapper activeState={activeState}>
       <p style={{ fontSize: 12, color: theme.colors.white }}>{content}</p>
     </S.Wrapper>
   );
@@ -15,7 +15,8 @@ const S = {
   Wrapper: styled.div`
     padding: 5px 8px;
     border-radius: 5px;
-    background-color: ${(props) => props.theme.colors.blue};
+    background-color: ${(props) =>
+      !props.activeState ? props.theme.colors.grey2 : props.theme.colors.blue};
     width: fit-content;
   `,
 };
