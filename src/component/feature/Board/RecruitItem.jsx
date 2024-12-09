@@ -30,7 +30,7 @@ const RecruitItem = ({ item, setData }) => {
   };
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
 
-  const filteredRating = (rating) => (isNaN(rating) ? 0 : rating);
+  const filteredRating = (rating) => (isNaN(rating) ? 0 : rating.toFixed(1));
 
   const theme = useTheme();
   const navigate = useNavigate();
