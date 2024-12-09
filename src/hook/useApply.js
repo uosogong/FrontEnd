@@ -1,11 +1,13 @@
 import { useEffect, useState, useCallback } from 'react';
 import { validateField } from '../utils';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import debounce from 'lodash/debounce';
 import { getFetcher } from '../api/method';
 
 const useApply = () => {
+  const { id } = useParams();
   const location = useLocation();
+  const navigate = useNavigate();
   const pageTitle = location.state || '';
 
   const [applyForm, setApplyForm] = useState({
@@ -32,7 +34,7 @@ const useApply = () => {
 
   const [uneditableData, setUneditableData] = useState({
     name: '',
-    job: '',
+    birthDay: '',
     studentId: '',
     departmentName: '',
   });
@@ -84,21 +86,24 @@ const useApply = () => {
 
   const fetchUserData = async () => {
     const res = await getFetcher('/users');
-    const { name, studentId, departmentName } = res.message;
+    const { name, studentId, departmentName, birthDay } = res.message;
 
     setUneditableData({
       name: name,
       studentId: studentId,
       departmentName: departmentName,
-      job: pageTitle,
+      birthDay: birthDay,
     });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     if (isFormValid) {
-      alert(JSON.stringify(applyForm));
       localStorage.removeItem('apply');
+      console.log(applyForm, uneditableData);
+      navigate('/mypage/timetable', {
+        state: { applyForm, uneditableData, id: id },
+      });
     }
   };
 

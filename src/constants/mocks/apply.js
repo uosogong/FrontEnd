@@ -4,8 +4,8 @@ export const unEditableForm = [
     key: 'name',
   },
   {
-    label: '직무유형 (직체/ 근로)',
-    key: 'job',
+    label: '생년월일',
+    key: 'birthDay',
   },
   {
     label: '학번',
