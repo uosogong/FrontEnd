@@ -23,11 +23,11 @@ const RightButton = () => {
   const NoneAuthButtonComponent = () => {
     return (
       <S.ButtonWrapper>
-        <button onClick={() => navigate('./login')}>
+        <button onClick={() => navigate('/login')}>
           <p style={{ fontSize: 16, color: theme.colors.grey3 }}>로그인</p>
         </button>
         <div style={{ width: 1, height: 12, background: theme.colors.grey3 }} />
-        <button onClick={() => navigate('./signup')}>
+        <button onClick={() => navigate('/signup')}>
           <p style={{ fontSize: 16, color: theme.colors.grey3 }}>회원가입</p>
         </button>
       </S.ButtonWrapper>
