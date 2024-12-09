@@ -5,6 +5,8 @@ import { useTheme } from 'styled-components';
 import TextArea from '../../component/common/TextArea';
 import DateInput from '../../component/common/DateInput /DateInput';
 import useModal from '../../hook/UI/useModal';
+import { patchFetcher } from '../../api/method';
+import { useNavigate } from 'react-router-dom';
 
 const Staff = () => {
   const theme = useTheme();
@@ -12,15 +14,47 @@ const Staff = () => {
   const [isWork, setIsWork] = useState(false);
   const dateRef = useRef();
   const introRef = useRef();
-
+  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
+  const navigate = useNavigate();
   useEffect(() => {
     load();
   }, []);
 
   const modal = useModal({
-    title: '저장되었습니다.',
+    title: '임시저장되었습니다.',
     onOk: () => {},
   });
+
+  const errormodal = useModal({
+    title: '마감일과 부서소개를 채워주세요.',
+    onOk: () => {},
+  });
+
+  const successModal = useModal({
+    title: '저장되었습니다.',
+    onOk: () => {
+      navigate(`/department/${userInfo.departmentId}`);
+    },
+  });
+
+  const submit = async () => {
+    if (
+      !introRef.current ||
+      !introRef.current.value ||
+      !dateRef.current ||
+      !dateRef.current.value
+    ) {
+      errormodal.open();
+      return;
+    }
+    await patchFetcher(`/departments/${userInfo.departmentId}`, {
+      scholarshipRecruitment: isWork,
+      internRecruitment: isIntern,
+      introduction: introRef.current.value,
+      recruitEndDay: dateRef.current.value,
+    });
+    successModal.open();
+  };
 
   const load = () => {
     setIsIntern(localStorage.getItem('isIntern'));
@@ -39,6 +73,8 @@ const Staff = () => {
   return (
     <S.Wrapper>
       {modal.render()}
+      {errormodal.render()}
+      {successModal.render()}
       <p style={{ fontSize: 28, fontWeight: 700, marginBottom: 40 }}>
         교직원용 모집 작성 페이지
       </p>
@@ -85,7 +121,7 @@ const Staff = () => {
         </S.ContentWrapper>
       </div>
       <div style={{ display: 'flex', gap: 10 }}>
-        <Button style={{ width: 250 }} onClick={() => console.log('제출')}>
+        <Button style={{ width: 250 }} onClick={submit}>
           제출
         </Button>
         <Button

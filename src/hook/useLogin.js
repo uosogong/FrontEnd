@@ -34,7 +34,7 @@ const useLogin = () => {
         password: inputData.password,
       });
       console.log(res);
-      const { token, role, name } = res.message;
+      const { token, role, name, departmentId } = res.message;
       setAccessToken((prev) => ({
         ...prev,
         name,
@@ -45,6 +45,7 @@ const useLogin = () => {
       localStorage.setItem(
         'userInfo',
         JSON.stringify({
+          departmentId,
           name,
           token,
           role,
