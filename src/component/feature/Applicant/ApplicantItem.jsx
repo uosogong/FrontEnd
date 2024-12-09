@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import useModal from '../../../hook/UI/useModal';
 import ApplicantModal from '../ApplicantModal/ApplicantModal';
 
-const ApplicantItem = ({ item }) => {
+const ApplicantItem = ({ item, role }) => {
   const theme = useTheme();
   const navigate = useNavigate();
   const modal = useModal({
@@ -19,7 +19,7 @@ const ApplicantItem = ({ item }) => {
 
   return (
     <>
-      {modal.render({ children: <ApplicantModal item={item} /> })}
+      {modal.render({ children: <ApplicantModal item={item} role={role} /> })}
       <S.ItemWrapper onClick={() => modal.open()}>
         <S.LeftWrapper>
           <S.MainContent>

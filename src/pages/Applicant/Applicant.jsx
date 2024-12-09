@@ -5,8 +5,10 @@ import { useEffect, useState } from 'react';
 
 const Applicant = () => {
   const [resumes, setResumes] = useState([]);
+  const [userRole, setRole] = useState('');
   useEffect(() => {
     const { role } = JSON.parse(localStorage.getItem('userInfo'));
+    setRole(role);
     if (role == 'ADMIN') fetchResume();
     else fetchMyResume();
   }, []);
@@ -28,7 +30,7 @@ const Applicant = () => {
     <S.Container>
       <S.ContentWrapper>
         {resumes.map((resume, i) => (
-          <ApplicantItem item={resume} key={i} />
+          <ApplicantItem item={resume} key={i} role={userRole} />
         ))}
       </S.ContentWrapper>
     </S.Container>

@@ -1,6 +1,7 @@
 import styled from 'styled-components';
 
-const ApplicantModal = ({ item }) => {
+const ApplicantModal = ({ item, role }) => {
+  console.log(role);
   function convertScheduleToMatrix(schedule) {
     const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
     const matrix = Array(12)
@@ -33,7 +34,10 @@ const ApplicantModal = ({ item }) => {
 
   return (
     <S.Container>
-      <TextTemplate label="이름" content={item.name} />
+      <TextTemplate
+        label={`${role == 'ADMIN' ? '이름' : '지원학과'}`}
+        content={item.name}
+      />
       <TextTemplate label="생년월일" content={item.birthday} />
       <TextTemplate label="학번" content={item.studentId} />
       <TextTemplate label="학부/과" content={item.departmentName} />
