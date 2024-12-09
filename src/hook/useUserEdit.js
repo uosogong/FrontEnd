@@ -93,15 +93,6 @@ const useUserEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    console.log(
-      ' 보내는 값: ' + editFormRef.current.name,
-      editFormRef.current.email,
-      editFormRef.current.password,
-      editFormRef.current.phoneNum,
-      editFormRef.current.departmentName,
-      editFormRef.current.birthDay,
-    );
-
     try {
       await patchFetcher('/users', {
         name: editFormRef.current.name,
@@ -109,7 +100,7 @@ const useUserEdit = () => {
         password: editFormRef.current.password,
         phone: editFormRef.current.phoneNum,
         departmentName: editFormRef.current.departmentName,
-        birthDay: editFormRef.current.birthDay,
+        birthday: editFormRef.current.birthDay,
       });
 
       navigate('/');
