@@ -7,8 +7,8 @@ const useModal = ({
   title,
   description,
   cancelText,
-  okText,
-  onOk = '확인',
+  okText = '확인',
+  onOk,
   closable,
 }) => {
   const [isOpen, setIsOpen] = useState();
