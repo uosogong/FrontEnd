@@ -44,11 +44,16 @@ const RecruitItem = ({ item, setData }) => {
             <div style={{ display: 'flex', gap: 10 }}>
               <Tag
                 content={'근로'}
-                activeState={item.content.scholarshipRecruitment}
+                activeState={
+                  item.content.scholarshipRecruitment &&
+                  item.content.leftDays > 0
+                }
               />
               <Tag
                 content={'직장체험형인턴'}
-                activeState={item.content.internRecruitment}
+                activeState={
+                  item.content.internRecruitment && item.content.leftDays > 0
+                }
               />
             </div>
             <p
@@ -61,11 +66,17 @@ const RecruitItem = ({ item, setData }) => {
               {item.content.name}
             </p>
           </S.MainContent>
-          <p
-            style={{ fontSize: 14, fontWeight: 700, color: theme.colors.grey3 }}
-          >
-            D-{item.content.leftDays}
-          </p>
+          {item.content.leftDays > 0 && (
+            <p
+              style={{
+                fontSize: 14,
+                fontWeight: 700,
+                color: theme.colors.grey3,
+              }}
+            >
+              D-{item.content.leftDays}
+            </p>
+          )}
         </S.LeftWrapper>
         <S.RightWrapper>
           <S.ReviewContent>
