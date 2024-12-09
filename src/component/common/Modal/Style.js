@@ -9,7 +9,7 @@ const ModalContainer = styled.div`
   align-items: center;
   flex-direction: column;
   background-color: #ffffff;
-  padding: 16px;
+  padding: 24px 16px;
   border-radius: 16px;
   filter: blur(12px);
   pointer-events: none;

@@ -43,6 +43,7 @@ const S = {
   `,
   TH: styled.th`
     background-color: ${(props) => props.theme.colors.grey1};
+    user-select: none;
   `,
 };
 
