@@ -41,7 +41,7 @@ const RecruitItem = ({ item, setData }) => {
           onClick={() => navigate(`/department/${item.departmentId}`)}
         >
           <S.MainContent>
-            <div style={{ display: 'flex', gap: 4 }}>
+            <div style={{ display: 'flex', gap: 10 }}>
               <Tag
                 content={'근로'}
                 activeState={item.content.internRecruitment}
@@ -53,7 +53,7 @@ const RecruitItem = ({ item, setData }) => {
             </div>
             <p
               style={{
-                fontSize: 16,
+                fontSize: 19,
                 fontWeight: 600,
                 color: theme.colors.grey4,
               }}
@@ -132,21 +132,21 @@ export default RecruitItem;
 
 const S = {
   ItemWrapper: styled.div`
-  display:flex;
-  justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
 
-  width: 470px;
-  height: 150px;
-  padding:15px; 20px;
+    width: 470px;
+    height: 150px;
+    padding: 20px 25px;
 
-  border: 1px solid ${(props) => props.theme.colors.grey1};
-  border-radius: 10px;
-  cursor:pointer;
-`,
+    border: 1px solid ${(props) => props.theme.colors.grey1};
+    border-radius: 10px;
+    cursor: pointer;
+  `,
   MainContent: styled.div`
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    gap: 20px;
   `,
   LeftWrapper: styled.div`
     flex-grow: 8.5;

@@ -3,6 +3,8 @@ import { debounce } from 'lodash';
 import { validateField } from '../utils';
 import { useRef, useState, useCallback, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useAtom } from 'jotai';
+import { tokenAtom } from '../store/tokenAtom';
 
 const useUserEdit = () => {
   const navigate = useNavigate();
@@ -12,6 +14,8 @@ const useUserEdit = () => {
     confirmPwd: '',
     name: '',
     phoneNum: '',
+    departmentName: '',
+    birthDay: '',
   });
 
   const [formState, setFormState] = useState({ ...editFormRef.current });
@@ -23,13 +27,16 @@ const useUserEdit = () => {
     phoneNum: null,
   });
 
+  const [token, setToken] = useAtom(tokenAtom);
+
   const [joinState, setJoinState] = useState('');
 
   // 정보 가져오기
   const fetchUserInfo = useCallback(async () => {
     try {
       const { message } = await getFetcher('/users');
-      const { name, email, phone } = message || {};
+      console.log(message);
+      const { name, email, phone, birthDay, departmentName } = message || {};
 
       if (name && email && phone) {
         const updatedForm = {
@@ -38,6 +45,8 @@ const useUserEdit = () => {
           phoneNum: phone,
           password: '',
           confirmPwd: '',
+          birthDay,
+          departmentName,
         };
         editFormRef.current = updatedForm;
         setFormState(updatedForm);
@@ -83,13 +92,17 @@ const useUserEdit = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
     try {
       await patchFetcher('/users', {
         name: editFormRef.current.name,
         email: editFormRef.current.email,
         password: editFormRef.current.password,
         phone: editFormRef.current.phoneNum,
+        departmentName: editFormRef.current.departmentName,
+        birthday: editFormRef.current.birthDay,
       });
+
       navigate('/');
     } catch (error) {
       console.log(error.status);
@@ -100,8 +113,9 @@ const useUserEdit = () => {
   };
 
   const isFormValid =
-    Object.values(editFormRef.current).every((value) => value.trim() !== '') &&
-    Object.values(errors).every((error) => error === null);
+    Object.values(editFormRef.current).every((value) =>
+      typeof value === 'string' ? value.trim() !== '' : value !== '',
+    ) && Object.values(errors).every((error) => error === null);
 
   return {
     editFormRef,
@@ -110,8 +124,8 @@ const useUserEdit = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-    disabled: !isFormValid,
     joinState,
+    disabled: !isFormValid,
   };
 };
 

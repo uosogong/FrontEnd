@@ -53,7 +53,11 @@ const RightButton = () => {
   };
   const handleLogout = () => {
     localStorage.removeItem('userInfo');
-    setaccessToken({ token: '', role: '', name: '' });
+    setaccessToken({
+      token: '',
+      role: '',
+      name: '',
+    });
     navigate('/login');
   };
 

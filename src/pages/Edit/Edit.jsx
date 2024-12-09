@@ -13,8 +13,8 @@ const Edit = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-    disabled,
     joinState,
+    disabled,
   } = useUserEdit();
 
   const [isModalOpen, setIsModalOpen] = useState(false);

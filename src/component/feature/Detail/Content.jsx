@@ -53,13 +53,20 @@ const Content = ({ id }) => {
         <pre>{Info.introduction}</pre>
       </S.ContentBox>
       <S.ButtonBox>
-        <button className="applyBtn" onClick={handleApplyClick}>
-          지원하기
-        </button>
-        {userRole !== '' && (
-          <button className={`${isDib ? `isDib` : `notDib`}`} onClick={postDib}>
-            찜하기
-          </button>
+        {userRole === 'USER' && (
+          <>
+            <button className="applyBtn" onClick={handleApplyClick}>
+              지원하기
+            </button>
+            {userRole !== '' && (
+              <button
+                className={`${isDib ? `isDib` : `notDib`}`}
+                onClick={postDib}
+              >
+                찜하기
+              </button>
+            )}
+          </>
         )}
       </S.ButtonBox>
       {isApplyModalOpen && (
