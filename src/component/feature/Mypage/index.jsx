@@ -47,7 +47,7 @@ const Student = () => {
         <p>찜 목록</p>
         <S.ArrowIcon src={Vector2} />
       </S.Button>
-      <S.Button onClick={() => navigate('./edit')}>
+      <S.Button onClick={() => navigate('./applicant')}>
         <S.ButtonIcon>📂</S.ButtonIcon>
         <p>내 지원목록 보기</p>
         <S.ArrowIcon src={Vector2} />
