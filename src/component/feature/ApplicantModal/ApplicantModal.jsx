@@ -30,6 +30,7 @@ const ApplicantModal = ({ item }) => {
     );
   };
   const value = convertScheduleToMatrix(JSON.parse(item.schedule));
+
   return (
     <S.Container>
       <TextTemplate label="이름" content={item.name} />
