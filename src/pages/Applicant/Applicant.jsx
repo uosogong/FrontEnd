@@ -1,5 +1,7 @@
 import { S } from './style';
 import ApplicantItem from '../../component/feature/Applicant/ApplicantItem';
+import { getFetcher } from '../../api/method';
+import { useEffect, useState } from 'react';
 const data = {
   id: 1,
   tag: '직장체험인턴',
@@ -18,6 +20,17 @@ const data = {
     '이런이런이유로 지원했습니다. 잘 봐주세요. 이런이런이유로 지원했습니다. 잘 봐주세요. 이런이런이유로 지원했습니다. 잘 봐주세요',
 };
 const Applicant = () => {
+  const [resume, setResume] = useState();
+  useEffect(() => {
+    fetchResume();
+  }, []);
+
+  console.log(resume);
+
+  const fetchResume = async () => {
+    const res = await getFetcher('/resumes');
+    setResume(res);
+  };
   return (
     <S.Container>
       <S.ContentWrapper>

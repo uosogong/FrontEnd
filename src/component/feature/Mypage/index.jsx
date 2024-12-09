@@ -1,13 +1,20 @@
 import Vector2 from '../../../assets/icon/Vector2.svg';
 import S from '@pages/MyPage/style';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const Admin = () => {
   const navigate = useNavigate();
+  const [id, setId] = useState('');
+
+  useEffect(() => {
+    const { departmentId } = JSON.parse(localStorage.getItem('userInfo'));
+    setId(departmentId);
+  }, []);
 
   return (
     <S.BottomContainer>
-      <S.Button onClick={() => navigate('/')}>
+      <S.Button onClick={() => navigate(`/department/${id}`)}>
         <S.ButtonIcon>📂</S.ButtonIcon>
         <p>내 부서가기</p>
         <S.ArrowIcon src={Vector2} />

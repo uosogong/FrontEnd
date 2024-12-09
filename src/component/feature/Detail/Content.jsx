@@ -35,7 +35,7 @@ const Content = ({ id }) => {
             {isNaN(Info.rating) ? (
               <p>아직 평점이 존재하지 않습니다! 🤫</p>
             ) : (
-              <p>{`평균 ${Info.rating}점`}</p>
+              <p>{`평균 ${parseFloat(Info.rating).toFixed(1)}점`}</p>
             )}
           </S.RateBox>
           <S.ChipContainer>
