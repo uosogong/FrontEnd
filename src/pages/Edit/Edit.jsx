@@ -13,7 +13,6 @@ const Edit = () => {
     handleChange,
     handleBlur,
     handleSubmit,
-    disabled,
     joinState,
   } = useUserEdit();
 
@@ -53,7 +52,7 @@ const Edit = () => {
         {isModalOpen && (
           <WithdrawModal isOpen={isModalOpen} close={handleCloseEditModal} />
         )}
-        <Button type="submit" onClick={handleSubmit} disabled={disabled}>
+        <Button type="submit" onClick={handleSubmit}>
           수정하기
         </Button>
         <Button className="btn_out" onClick={handleEditClick}>

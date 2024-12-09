@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react';
-import { postFetcher } from '../api/method';
+import { postFetcher, getFetcher } from '../api/method';
 import { useSetAtom } from 'jotai';
 import { tokenAtom } from '../store/tokenAtom';
 import { useNavigate } from 'react-router-dom';
@@ -50,11 +50,26 @@ const useLogin = () => {
           role,
         }),
       );
-      navigate('/');
+
+      const { birthDay, departmentName } = await fetchUserInfo();
+      if (birthDay == null && departmentName == null) navigate('/mypage/edit');
+      else navigate('/');
     } catch (error) {
       if (error.status === 500) {
         setLoginState('아이디와 비밀번호를 다시 확인해주세요! 🤨');
       }
+    }
+  };
+
+  // 정보 가져오기
+  const fetchUserInfo = async () => {
+    try {
+      const { message } = await getFetcher('/users');
+      console.log(message);
+      const { birthDay, departmentName } = message || {};
+      return { birthDay, departmentName };
+    } catch (error) {
+      console.error(error);
     }
   };
 

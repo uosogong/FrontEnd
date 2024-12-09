@@ -44,6 +44,26 @@ const EDIT_FORM = [
       },
     ],
   },
+  {
+    label: '학과',
+    info: [
+      {
+        type: 'text',
+        placeholder: '00 학과 / 00 학부',
+        name: 'departmentName',
+      },
+    ],
+  },
+  {
+    label: '생년월일',
+    info: [
+      {
+        type: 'text',
+        placeholder: '생년월일8자리를 입력해주세요',
+        name: 'birthDay',
+      },
+    ],
+  },
 ];
 
 export default EDIT_FORM;
