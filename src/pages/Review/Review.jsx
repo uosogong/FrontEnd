@@ -7,6 +7,8 @@ import useModal from '../../hook/UI/useModal';
 import startFilled from '../../assets/icon/start-filled.svg';
 import startOutlined from '../../assets/icon/star-outline.svg';
 import { S } from './style';
+import { postFetcher } from '../../api/method';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 const Review = () => {
   const theme = useTheme();
@@ -15,11 +17,41 @@ const Review = () => {
   const [mood, setMood] = useState('화목함');
 
   const reasonRef = useRef();
+  const location = useLocation();
+  const navigate = useNavigate();
+  const id = location.pathname.split('/')[2];
 
   const modal = useModal({
     title: '저장되었습니다.',
     onOk: () => {},
   });
+
+  const INTENSITY_ENUM = {
+    널널함: 'EASY',
+    보통: 'NORMAL',
+    바쁨: 'HARD',
+  };
+
+  const MOOD_ENUM = {
+    화목함: 'HARMONY',
+    엄격함: 'STRICT',
+    유쾌함: 'PLEASANT',
+    적막함: 'SILENCE',
+  };
+
+  const submit = async () => {
+    try {
+      await postFetcher(`/feedbacks/${id}`, {
+        description: reasonRef.current.value,
+        rating: starCount,
+        busy: INTENSITY_ENUM[intensity],
+        mood: MOOD_ENUM[mood],
+      });
+      navigate(`/department/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <S.Wrapper>
@@ -142,7 +174,7 @@ const Review = () => {
           불가능합니다! 신중하게 작성부탁드립니다 :)
         </S.SubText>
 
-        <Button style={{ width: 320 }} onClick={() => console.log('제출')}>
+        <Button style={{ width: 320 }} onClick={submit}>
           제출
         </Button>
       </div>
