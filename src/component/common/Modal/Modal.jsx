@@ -21,11 +21,6 @@ const Modal = ({
       {description && <Description>{description}</Description>}
       {children}
       <ButtonWrap>
-        {closable && (
-          <Button onClick={close} style={{ width: 250 }}>
-            취소
-          </Button>
-        )}
         <Button onClick={handleOkButtonClick} style={{ width: 250 }}>
           {okText}
         </Button>
