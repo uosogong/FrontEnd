@@ -64,7 +64,7 @@ const RecruitItem = ({ item, setData }) => {
           <p
             style={{ fontSize: 14, fontWeight: 700, color: theme.colors.grey3 }}
           >
-            D{item.content.leftDays}
+            D-{item.content.leftDays}
           </p>
         </S.LeftWrapper>
         <S.RightWrapper>

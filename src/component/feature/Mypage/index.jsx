@@ -52,11 +52,6 @@ const Student = () => {
         <p>내 지원목록 보기</p>
         <S.ArrowIcon src={Vector2} />
       </S.Button>
-      <S.Button onClick={() => navigate('./timetable')}>
-        <S.ButtonIcon>📘</S.ButtonIcon>
-        <p>내 시간표 관리</p>
-        <S.ArrowIcon src={Vector2} />
-      </S.Button>
     </S.BottomContainer>
   );
 };
