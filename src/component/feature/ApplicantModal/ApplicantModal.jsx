@@ -18,13 +18,13 @@ const ApplicantModal = ({ item }) => {
       <TextTemplate label="생년월일" content={item.birth} />
       <TextTemplate label="학번" content={item.studentId} />
       <TextTemplate label="학부/과" content={item.department} />
-      <TextTemplate label="연락처" content={item.phoneNumber} />
+      <TextTemplate label="연락처" content={item.phone} />
       <TextTemplate label="이메일" content={item.email} />
       <TextTemplate label="주소" content={item.address} />
-      <TextTemplate label="근무지(직전학기)" content={item.prevWorkPlace} />
-      <TextTemplate label="총 근로학기" content={item.totalWorkDuration} />
-      <TextTemplate label="타장학 수혜내용" content={item.scholarship} />
-      <TextTemplate label="지원동기" content={item.motivation} />
+      <TextTemplate label="근무지(직전학기)" content={item.workplace} />
+      <TextTemplate label="총 근로학기" content={item.totalWorkSemester} />
+      <TextTemplate label="타장학 수혜내용" content={item.otherScholarship} />
+      <TextTemplate label="지원동기" content={item.content} />
     </S.Container>
   );
 };
