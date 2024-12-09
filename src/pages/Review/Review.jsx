@@ -26,6 +26,14 @@ const Review = () => {
     onOk: () => {},
   });
 
+  const errorModal = useModal({
+    title: '이미 후기를 작성하셨습니다',
+    onOk: () => {
+      navigate(`/department/${id}`);
+    },
+    okText: '확인',
+  });
+
   const INTENSITY_ENUM = {
     널널함: 'EASY',
     보통: 'NORMAL',
@@ -41,13 +49,17 @@ const Review = () => {
 
   const submit = async () => {
     try {
-      await postFetcher(`/feedbacks/${id}`, {
+      const response = await postFetcher(`/feedbacks/${id}`, {
         description: reasonRef.current.value,
         rating: starCount,
         busy: INTENSITY_ENUM[intensity],
         mood: MOOD_ENUM[mood],
       });
-      navigate(`/department/${id}`);
+      if (response) {
+        navigate(`/department/${id}`);
+        return;
+      }
+      errorModal.open();
     } catch (error) {
       console.log(error);
     }
@@ -56,7 +68,7 @@ const Review = () => {
   return (
     <S.Wrapper>
       {modal.render()}
-
+      {errorModal.render()}
       <S.Continaer>
         <S.TextWrapper>
           <p style={{ fontSize: 28, fontWeight: 700 }}>
