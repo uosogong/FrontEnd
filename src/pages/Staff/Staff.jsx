@@ -116,7 +116,7 @@ const Staff = () => {
         </S.ContentWrapper>
 
         <S.ContentWrapper>
-          <p style={{ fontSize: 20, fontWeight: 600 }}>부서소개</p>
+          <p style={{ fontSize: 20, fontWeight: 600 }}>부서 소개</p>
           <TextArea ref={introRef} style={{ height: 400 }} />
         </S.ContentWrapper>
       </div>

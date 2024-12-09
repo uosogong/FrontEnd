@@ -44,11 +44,11 @@ const RecruitItem = ({ item, setData }) => {
             <div style={{ display: 'flex', gap: 10 }}>
               <Tag
                 content={'근로'}
-                activeState={item.content.internRecruitment}
+                activeState={item.content.scholarshipRecruitment}
               />
               <Tag
                 content={'직장체험형인턴'}
-                activeState={item.content.scholarshipRecruitment}
+                activeState={item.content.internRecruitment}
               />
             </div>
             <p

@@ -15,14 +15,28 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
 
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v3
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ap-northeast-2
+
       - name: Install Dependencies
         run: npm install
+
+      - name: Load ENV_FILE secret
+        run: |
+          echo "${{ secrets.ENV_FILE }}" > .env
 
       - name: Build Project
         run: npm run build
 
       - name: Deploy to S3
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: aws s3 cp --recursive --region ap-northeast-2 dist s3://sogoing-client
+        run: aws s3 cp --recursive dist s3://sogoing-client
+
+      - name: Cloudfront invalidation
+        run: |
+          aws cloudfront create-invalidation \
+            --distribution-id ${{ secrets.AWS_DISTRIBUTION_ID }} \
+            --paths "/*"

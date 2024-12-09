@@ -1,5 +1,5 @@
 export const timeTableParsor = (value) => {
-  const days = ['월', '화', '수', '목', '금', '토', '일'];
+  const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
   const result = {};
 
   for (let col = 0; col < 7; col++) {
@@ -14,14 +14,14 @@ export const timeTableParsor = (value) => {
         }
       } else {
         if (start !== null) {
-          result[day].push({ start: start, end: row - 1 });
+          result[day].push({ startTime: start, endTime: row - 1 });
           start = null;
         }
       }
     }
 
     if (start !== null) {
-      result[day].push({ start: start, end: value.length - 1 });
+      result[day].push({ startTime: start, endTime: value.length - 1 });
     }
   }
 
