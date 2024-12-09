@@ -1,6 +1,24 @@
 import styled from 'styled-components';
 
 const ApplicantModal = ({ item }) => {
+  function convertScheduleToMatrix(schedule) {
+    const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+    const matrix = Array(12)
+      .fill()
+      .map(() => Array(7).fill(false));
+
+    daysOfWeek.forEach((day, dayIndex) => {
+      const daySchedule = schedule[day];
+      daySchedule.forEach((timeSlot) => {
+        for (let hour = timeSlot.startTime; hour < timeSlot.endTime; hour++) {
+          matrix[hour][dayIndex] = true;
+        }
+      });
+    });
+
+    return matrix;
+  }
+
   const TextTemplate = ({ label, content }) => {
     return (
       <S.TextWrapper>
@@ -11,7 +29,7 @@ const ApplicantModal = ({ item }) => {
       </S.TextWrapper>
     );
   };
-
+  const value = convertScheduleToMatrix(JSON.parse(item.schedule));
   return (
     <S.Container>
       <TextTemplate label="이름" content={item.name} />
@@ -25,6 +43,33 @@ const ApplicantModal = ({ item }) => {
       <TextTemplate label="총 근로학기" content={item.totalWorkSemester} />
       <TextTemplate label="타장학 수혜내용" content={item.otherScholarship} />
       <TextTemplate label="지원동기" content={item.content} />
+      <S.Table className="timetable">
+        <thead>
+          <tr>
+            <S.TH></S.TH>
+            <S.TH>Mon</S.TH>
+            <S.TH>Tue</S.TH>
+            <S.TH>Wed</S.TH>
+            <S.TH>Thu</S.TH>
+            <S.TH>Fri</S.TH>
+            <S.TH>Sat</S.TH>
+            <S.TH>Sun</S.TH>
+          </tr>
+        </thead>
+        <tbody>
+          {value.map((row, rowIndex) => (
+            <tr key={rowIndex}>
+              <S.TH>{rowIndex + 9}</S.TH>
+              {row.map((_, columnIndex) => (
+                <S.TD
+                  key={columnIndex}
+                  selected={value[rowIndex][columnIndex]}
+                />
+              ))}
+            </tr>
+          ))}
+        </tbody>
+      </S.Table>
     </S.Container>
   );
 };
@@ -58,5 +103,18 @@ const S = {
     color: ${(props) => props.theme.colors.grey4};
     word-break: keep-all;
     white-space: pre-wrap;
+  `,
+  Table: styled.table`
+    cursor: pointer;
+  `,
+  TD: styled.td`
+    width: 80px;
+    height: 60px;
+    background-color: ${(props) =>
+      props.selected ? props.theme.colors.blue : 'white'};
+    border: 1px solid ${(props) => props.theme.colors.grey2};
+  `,
+  TH: styled.th`
+    background-color: ${(props) => props.theme.colors.grey1};
   `,
 };
