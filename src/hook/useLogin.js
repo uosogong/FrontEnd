@@ -52,10 +52,13 @@ const useLogin = () => {
       );
 
       const { birthDay, departmentName } = await fetchUserInfo();
-      if (birthDay == null && departmentName == null) navigate('/mypage/edit');
+      console.log(role);
+      if (role == 'ADMIN') navigate('/');
+      else if (birthDay == null && departmentName == null)
+        navigate('/mypage/edit');
       else navigate('/');
     } catch (error) {
-      if (error.status === 500) {
+      if (error.status === 400 || error.status === 500) {
         setLoginState('아이디와 비밀번호를 다시 확인해주세요! 🤨');
       }
     }
