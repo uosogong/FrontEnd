@@ -78,7 +78,7 @@ export default ApplicantModal;
 
 const S = {
   Container: styled.div`
-    max-height: 800px;
+    max-height: 500px;
     width: 100%;
     padding: 10px;
     display: flex;
