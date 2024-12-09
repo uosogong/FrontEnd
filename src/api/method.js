@@ -54,16 +54,6 @@ const onErrorResponse = (error) => {
 
     switch (status) {
       case 401:
-        postFetcher('/auth/refresh', {
-          Authorization: `Bearer ${refreshToken}`,
-        })
-          .then((res) => {
-            localStorage.setItem('refreshToken', res.refreshToken);
-            localStorage.getItem('accessToken', res.accessToken);
-          })
-          .catch((error) => {
-            console.log(error);
-          });
         handleError('토큰이 만료되었습니다.');
         break;
       case 403:
