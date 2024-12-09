@@ -93,6 +93,15 @@ const useUserEdit = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+    console.log(
+      ' 보내는 값: ' + editFormRef.current.name,
+      editFormRef.current.email,
+      editFormRef.current.password,
+      editFormRef.current.phoneNum,
+      editFormRef.current.departmentName,
+      editFormRef.current.birthDay,
+    );
+
     try {
       await patchFetcher('/users', {
         name: editFormRef.current.name,
@@ -103,12 +112,6 @@ const useUserEdit = () => {
         birthDay: editFormRef.current.birthDay,
       });
 
-      setToken((prev) => ({
-        ...prev,
-        departmentName: editFormRef.current.departmentName,
-        birthDay: editFormRef.current.birthDay,
-      }));
-
       navigate('/');
     } catch (error) {
       console.log(error.status);
@@ -118,6 +121,11 @@ const useUserEdit = () => {
     }
   };
 
+  const isFormValid =
+    Object.values(editFormRef.current).every((value) =>
+      typeof value === 'string' ? value.trim() !== '' : value !== '',
+    ) && Object.values(errors).every((error) => error === null);
+
   return {
     editFormRef,
     errors,
@@ -126,6 +134,7 @@ const useUserEdit = () => {
     handleBlur,
     handleSubmit,
     joinState,
+    disabled: !isFormValid,
   };
 };
 
