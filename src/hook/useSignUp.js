@@ -70,6 +70,9 @@ const useSignUp = () => {
     } catch (error) {
       console.log(error.status);
       if (error.status === 400 || error.status === 500) {
+        setJoinState('유효하지 않은 값이 포함되었습니다! 🤨');
+      }
+      if (error.status === 403) {
         setJoinState('이미 등록된 회원입니다! 🤨');
       }
     }

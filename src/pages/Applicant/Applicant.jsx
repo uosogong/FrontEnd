@@ -20,28 +20,25 @@ const data = {
     '이런이런이유로 지원했습니다. 잘 봐주세요. 이런이런이유로 지원했습니다. 잘 봐주세요. 이런이런이유로 지원했습니다. 잘 봐주세요',
 };
 const Applicant = () => {
-  const [resume, setResume] = useState();
+  const [resumes, setResumes] = useState([]);
   useEffect(() => {
     fetchResume();
   }, []);
 
-  console.log(resume);
+  console.log(resumes);
 
   const fetchResume = async () => {
-    const res = await getFetcher('/resumes');
-    setResume(res);
+    const res = await getFetcher(
+      `/resumes?isScholarshipResume=true&isInternResume=true`,
+    );
+    setResumes(res.message);
   };
   return (
     <S.Container>
       <S.ContentWrapper>
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
-        <ApplicantItem item={data} />
+        {resumes.map((resume, i) => (
+          <ApplicantItem item={resume} key={i} />
+        ))}
       </S.ContentWrapper>
     </S.Container>
   );

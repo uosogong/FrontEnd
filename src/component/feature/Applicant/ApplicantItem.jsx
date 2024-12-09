@@ -12,6 +12,11 @@ const ApplicantItem = ({ item }) => {
     closable: true,
     onOk: () => console.log('채용'),
   });
+
+  console.log(JSON.parse(item.schedule));
+
+  const tagName = item.isInternResume ? '직장체험형인턴' : '근로장학';
+
   return (
     <>
       {modal.render({ children: <ApplicantModal item={item} /> })}
@@ -32,10 +37,10 @@ const ApplicantItem = ({ item }) => {
                 학번 : {item.studentId}
               </p>
               <p style={{ fontSize: 14, color: theme.colors.grey3 }}>
-                학과 : {item.department}
+                학과 : {item.departmentName}
               </p>
               <p style={{ fontSize: 14, color: theme.colors.grey3 }}>
-                전화번호 : {item.phoneNumber}
+                전화번호 : {item.phone}
               </p>
             </S.InfoWrapper>
           </S.MainContent>
@@ -43,8 +48,7 @@ const ApplicantItem = ({ item }) => {
         <S.RightWrapper>
           <S.ReviewContent>
             <p style={{ fontSize: 14 }}> 자세히 보기</p>
-
-            <Tag content={item.tag} />
+            <Tag content={tagName} />
           </S.ReviewContent>
         </S.RightWrapper>
       </S.ItemWrapper>

@@ -2,10 +2,6 @@ import styled from 'styled-components';
 import { useEffect } from 'react';
 
 export const BlackScreen = ({ isOpen, onClick }) => {
-  useEffect(() => {
-    document.body.style.overflow = isOpen ? 'hidden' : 'auto';
-  }, [isOpen]);
-
   return <BlackScreenContainer isOpen={isOpen} onClick={onClick} />;
 };
 
